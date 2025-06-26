@@ -70,6 +70,12 @@ public class MovementController : MonoBehaviour
         spinning.ReduceSpinSpeed(damage * defenseCoefficient);
     }
 
+    public void GainHealth(float amount)
+    {
+        Debug.Log(this.name + " gain health");
+        spinning.IncreaseSpinSpeed(amount);
+    }
+
     // Update is called once per frame
     void Update()
     {

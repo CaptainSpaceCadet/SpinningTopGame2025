@@ -30,6 +30,12 @@ public class Spinning : MonoBehaviour
         }
     }
 
+    public void IncreaseSpinSpeed(float amount)
+    {
+        Debug.Log("Spin increased to " + currentSpinSpeed);
+        currentSpinSpeed += amount;
+    }
+
     private void FixedUpdate()
     {
         if (!doSpin) return;
