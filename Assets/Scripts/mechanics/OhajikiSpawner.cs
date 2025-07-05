@@ -1,34 +1,44 @@
 using UnityEngine;
+using Cysharp.Threading.Tasks;
+using System;
+using UnityEngine.UIElements;
+using System.Threading.Tasks;
 
 public class OhajikiSpawner : MonoBehaviour
 {
 	[SerializeField] private GameObject ohajikiPrefab;
-	[SerializeField] private int ohajikiAmount = 3;
+	[SerializeField] private int ohajikiAmount = 3; 
+	[SerializeField] private float spawnRateInSeconds = 2f;
 	[Header("This property is automatically set if a collider is available")]
 	[SerializeField] private float spaceBetweenOhajikis = 2.0f;
 	private GameObject ohajikiGroup;
 
+	private bool canSpawn;
+
 
 	private void Start()
 	{
-		var collider = ohajikiPrefab?.GetComponent<Collider>();
+		// Instantiate ohajikiPrefab to get the size of a collider attached to the object
+		var temp = Instantiate(ohajikiPrefab);
+		var collider = temp.GetComponent<Collider>();
 		spaceBetweenOhajikis = collider?.bounds.size.x ?? spaceBetweenOhajikis;
+		Destroy(temp);
 
-		CreateOhajikiGroup();
+		canSpawn = true;
 	}
 
-	private void SpawnOhajiki()
+	private void Update()
 	{
-		Instantiate(ohajikiGroup, this.transform.position, this.transform.rotation);
+		if(canSpawn) SpawnOhajiki();
 	}
 
-
-	private void CreateOhajikiGroup()
+	// This might need a serious optimization
+	// might use object pool if this is too computationally costly
+	// but as long as it works on our laptop, I'm just going to leave it 
+	private async Task SpawnOhajiki()
 	{
+		canSpawn = false;
 		if (ohajikiPrefab == null || ohajikiAmount <= 0) return;
-
-		ohajikiGroup = new GameObject("OhajikiGroup");
-		ohajikiGroup.transform.SetParent(transform, false);
 
 		float totalLength = (ohajikiAmount - 1) * spaceBetweenOhajikis;
 		float startX = -totalLength / 2f;
@@ -36,10 +46,14 @@ public class OhajikiSpawner : MonoBehaviour
 		for (int i = 0; i < ohajikiAmount; i++)
 		{
 			Vector3 localOffset = new Vector3(startX + i * spaceBetweenOhajikis, 0f, 0f);
+			Debug.Log(spaceBetweenOhajikis);
 			Vector3 spawnPos = transform.position + transform.TransformDirection(localOffset);
 
-			Instantiate(ohajikiPrefab, spawnPos, Quaternion.identity, ohajikiGroup.transform);
+			Instantiate(ohajikiPrefab, spawnPos, this.transform.rotation);
 		}
+
+		await UniTask.Delay(TimeSpan.FromSeconds(spawnRateInSeconds));
+		canSpawn = true;
 	}
 
 	private void OnDrawGizmos()
