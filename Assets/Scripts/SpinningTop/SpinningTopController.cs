@@ -21,11 +21,15 @@ public class SpinningTopController : MonoBehaviour
 	[SerializeField] private float jumpForce = 5f;
 	[Header("Ground check distance")]
 	[SerializeField] private float groundCheckDistance = 0.1f;
+	[Header("Y coordinate point where the spinning top respawns")]
+	[SerializeField] private float respawnThreshold = -10f;
 	private float acceleration => maxSpeed / timeToMaxSpeed;
 	private float deceleration => maxSpeed / inertiaTime;
 	private Quaternion defaultRotation;
 	private Rigidbody rb;
 	private bool isGrounded = false;
+
+	private Vector3 respawnPoint;
 
 	private void Start()
 	{
@@ -36,6 +40,8 @@ public class SpinningTopController : MonoBehaviour
 			rb = gameObject.AddComponent<Rigidbody>();
 			rb.constraints = RigidbodyConstraints.FreezeRotation;
 		}
+
+		respawnPoint = this.transform.position;
 	}
 
 	public void OnMove(InputAction.CallbackContext context)
@@ -51,8 +57,19 @@ public class SpinningTopController : MonoBehaviour
 		}
 	}
 
+	private bool CheckOutofBounds()
+	{
+		return this.transform.position.y < respawnThreshold;
+	}
+
+	private void Respawn()
+	{
+		this.transform.position = respawnPoint;
+	}
+
 	private void Update()
 	{
+		if (CheckOutofBounds()) Respawn();
 		// Ground check
 		isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance + 0.01f);
 
