@@ -3,8 +3,6 @@ using UnityEngine.InputSystem;
 
 public class SpinningTopController : MonoBehaviour
 {
-	[SerializeField] private GameManager gameManager;
-	
 	private Vector2 m_moveInput = Vector2.zero;
 	private Vector2 m_currentDirection = Vector2.zero;
 	private float speed = 0f;
@@ -24,7 +22,7 @@ public class SpinningTopController : MonoBehaviour
 	[Header("Ground check distance")]
 	[SerializeField] private float groundCheckDistance = 0.1f;
 	[Header("Y coordinate point where the spinning top respawns")]
-	[SerializeField] private float respawnThreshold = -10f;
+	[SerializeField] private float respawnThreshold = -30f;
 	private float acceleration => maxSpeed / timeToMaxSpeed;
 	private float deceleration => maxSpeed / inertiaTime;
 	private Quaternion defaultRotation;
@@ -66,13 +64,14 @@ public class SpinningTopController : MonoBehaviour
 
 	private void Respawn()
 	{
-		gameManager.DecreaseLives();
+		GameManager.instance.DecreaseLives();
 		this.transform.position = respawnPoint;
 		this.transform.rotation = defaultRotation;
 		rb.angularVelocity = Vector3.zero;
+		//rb.linearVelocity = Vector3.zero;
 	}
 
-	private void Update()
+	private void FixedUpdate()
 	{
 		if (CheckOutofBounds()) Respawn();
 		// Ground check

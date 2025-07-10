@@ -1,6 +1,7 @@
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using System;
+using System.Collections.Generic;
 using UnityEngine.UIElements;
 using System.Threading.Tasks;
 
@@ -15,6 +16,7 @@ public class OhajikiSpawner : MonoBehaviour
 
 	private bool canSpawn;
 
+	Queue<GameObject> ohajikiQueue = new Queue<GameObject>();
 
 	private void Start()
 	{
@@ -47,11 +49,19 @@ public class OhajikiSpawner : MonoBehaviour
 
 		for (int i = 0; i < ohajikiAmount; i++)
 		{
-			Vector3 localOffset = new Vector3(startX + i * spaceBetweenOhajikis, 0f, 0f);
+			Vector3 localOffset = new Vector3(startX + i * spaceBetweenOhajikis, 0.15f, 0f);
 			//Debug.Log(spaceBetweenOhajikis);
 			Vector3 spawnPos = transform.position + transform.TransformDirection(localOffset);
 
-			Instantiate(ohajikiPrefab, spawnPos, this.transform.rotation);
+			if (ohajikiQueue.Count < 1 || ohajikiQueue.Peek().layer != 6) 
+				ohajikiQueue.Enqueue(Instantiate(ohajikiPrefab, spawnPos, this.transform.rotation));
+			else
+			{
+				Debug.Log("Ohajiki Teleport");
+				GameObject ohajiki = ohajikiQueue.Dequeue();
+				ohajiki.transform.position = spawnPos;
+				ohajiki.transform.rotation = this.transform.rotation;
+			}
 		}
 
 		await UniTask.Delay(TimeSpan.FromSeconds(spawnRateInSeconds));

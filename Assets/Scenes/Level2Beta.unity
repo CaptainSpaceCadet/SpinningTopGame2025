@@ -580,6 +580,8 @@ MonoBehaviour:
   speed: 3
   xBound: {x: -21, y: 274}
   zBound: {x: -5, y: 5}
+  yKillBound: -50
+  cullable: 0
 --- !u!65 &40212017
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1124,6 +1126,8 @@ MonoBehaviour:
   speed: 3
   xBound: {x: -21, y: 274}
   zBound: {x: -5, y: 5}
+  yKillBound: -50
+  cullable: 0
 --- !u!65 &65937522
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2142,6 +2146,8 @@ MonoBehaviour:
   speed: 3
   xBound: {x: -21, y: 274}
   zBound: {x: -5, y: 5}
+  yKillBound: -50
+  cullable: 0
 --- !u!65 &119088136
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3460,6 +3466,8 @@ MonoBehaviour:
   speed: 3
   xBound: {x: -21, y: 274}
   zBound: {x: -5, y: 5}
+  yKillBound: -50
+  cullable: 0
 --- !u!65 &174428859
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5841,6 +5849,8 @@ MonoBehaviour:
   speed: 3
   xBound: {x: -21, y: 274}
   zBound: {x: -5, y: 5}
+  yKillBound: -50
+  cullable: 0
 --- !u!65 &271168065
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6105,6 +6115,8 @@ MonoBehaviour:
   speed: 3
   xBound: {x: -21, y: 274}
   zBound: {x: -5, y: 5}
+  yKillBound: -50
+  cullable: 0
 --- !u!65 &291543367
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14103,6 +14115,8 @@ MonoBehaviour:
   speed: 3
   xBound: {x: -21, y: 274}
   zBound: {x: -5, y: 5}
+  yKillBound: -50
+  cullable: 0
 --- !u!65 &680295736
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16917,6 +16931,8 @@ MonoBehaviour:
   speed: 3
   xBound: {x: -21, y: 274}
   zBound: {x: -5, y: 5}
+  yKillBound: -50
+  cullable: 0
 --- !u!65 &850375026
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18669,13 +18685,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963075643}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2728621, y: -0, z: -0, w: 0.9620532}
-  m_LocalPosition: {x: 3.2, y: 19.27, z: -26.67}
+  m_LocalRotation: {x: 0.30705267, y: -0, z: -0, w: 0.9516925}
+  m_LocalPosition: {x: 4.45, y: 16.7, z: -19.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 31.669, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 35.763, y: 0, z: 0}
 --- !u!114 &963075647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21333,6 +21349,8 @@ MonoBehaviour:
   speed: 3
   xBound: {x: -21, y: 274}
   zBound: {x: -5, y: 5}
+  yKillBound: -50
+  cullable: 0
 --- !u!65 &1116665952
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25110,6 +25128,8 @@ MonoBehaviour:
   speed: 3
   xBound: {x: -21, y: 274}
   zBound: {x: -5, y: 5}
+  yKillBound: -50
+  cullable: 0
 --- !u!65 &1329149574
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26493,6 +26513,8 @@ MonoBehaviour:
   speed: 3
   xBound: {x: -21, y: 274}
   zBound: {x: -5, y: 5}
+  yKillBound: -50
+  cullable: 0
 --- !u!65 &1415638226
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26818,6 +26840,8 @@ MonoBehaviour:
   speed: 3
   xBound: {x: -21, y: 274}
   zBound: {x: -5, y: 5}
+  yKillBound: -50
+  cullable: 0
 --- !u!65 &1445687391
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27751,6 +27775,8 @@ MonoBehaviour:
   speed: 3
   xBound: {x: -21, y: 274}
   zBound: {x: -5, y: 5}
+  yKillBound: -50
+  cullable: 0
 --- !u!65 &1484472796
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28066,6 +28092,8 @@ MonoBehaviour:
   speed: 3
   xBound: {x: -21, y: 274}
   zBound: {x: -5, y: 5}
+  yKillBound: -50
+  cullable: 0
 --- !u!65 &1496074874
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30050,6 +30078,8 @@ MonoBehaviour:
   speed: 3
   xBound: {x: -21, y: 274}
   zBound: {x: -5, y: 5}
+  yKillBound: -50
+  cullable: 0
 --- !u!65 &1574452839
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -32833,6 +32863,8 @@ MonoBehaviour:
   speed: 3
   xBound: {x: -21, y: 274}
   zBound: {x: -5, y: 5}
+  yKillBound: -50
+  cullable: 0
 --- !u!65 &1756148306
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -33467,6 +33499,10 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1503594905}
+    - target: {fileID: 6250246419513969956, guid: 566923857c36842d88abafe41a35e955, type: 3}
+      propertyPath: m_Constraints
+      value: 16
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -38098,6 +38134,8 @@ MonoBehaviour:
   speed: 3
   xBound: {x: -21, y: 274}
   zBound: {x: -5, y: 5}
+  yKillBound: -50
+  cullable: 0
 --- !u!65 &1960157580
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -39497,6 +39535,8 @@ MonoBehaviour:
   speed: 3
   xBound: {x: -21, y: 274}
   zBound: {x: -5, y: 5}
+  yKillBound: -50
+  cullable: 0
 --- !u!65 &2024382894
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -39812,6 +39852,8 @@ MonoBehaviour:
   speed: 3
   xBound: {x: -21, y: 274}
   zBound: {x: -5, y: 5}
+  yKillBound: -50
+  cullable: 0
 --- !u!65 &2043508848
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -41169,6 +41211,8 @@ MonoBehaviour:
   speed: 3
   xBound: {x: -21, y: 274}
   zBound: {x: -5, y: 5}
+  yKillBound: -50
+  cullable: 0
 --- !u!65 &2124419341
 BoxCollider:
   m_ObjectHideFlags: 0

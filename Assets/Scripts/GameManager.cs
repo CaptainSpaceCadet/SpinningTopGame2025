@@ -100,8 +100,8 @@ public class GameManager : MonoBehaviour
         lifeContainer.SetActive(false);
         balloonContainer.SetActive(false);
         
-        lossScreen.SetActive(true);
-        winScreen.SetActive(false);
+        lossScreen.SetActive(false);
+        winScreen.SetActive(true);
         
         OnLevelEnd?.Invoke();
         

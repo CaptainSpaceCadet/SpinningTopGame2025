@@ -6,10 +6,13 @@ public class Ohajiki : MonoBehaviour
 
     [SerializeField] private Vector2 xBound;
     [SerializeField] private Vector2 zBound;
+
+    [SerializeField] private float yKillBound = -30;
+    
+    public bool cullable = false;
     
     private Rigidbody rb;
     private bool isGrounded = true;
-
     
     void Start()
     {
@@ -39,7 +42,7 @@ public class Ohajiki : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(transform.position.x); // for some reason without this line it doesn't work!!!
+        //Debug.Log(transform.position.x); // for some reason without this line it doesn't work!!!
         if (isGrounded && transform.position.x > 23)
         {
             Debug.Log("Ohajiki is out of bounds");
@@ -47,6 +50,12 @@ public class Ohajiki : MonoBehaviour
             
             rb.isKinematic = false;
             rb.useGravity = true;
+        } else if (transform.position.y < yKillBound)
+        {
+            cullable = true;
+            gameObject.layer = 6;
+            rb.isKinematic = true;
+            rb.useGravity = false;
         }
     }
     
