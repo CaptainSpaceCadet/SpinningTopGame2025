@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class Koinobori : MonoBehaviour
+public class Koinobori : MonoBehaviour, IResettable
 {
 	[SerializeField] private bool fallForever = false;
 	
 	[Range(1f, 180f), Header("Degree between world Y-Axis and the normal of the contact point")]
 	[SerializeField] private float theta = 30.0f;
 	[SerializeField] private float initialFallSpeed = 0.5f;
-	[SerializeField] private float acceleration  = 0.5f;
+	[SerializeField] private float acceleration = 0.5f;
 
 	private float initialHeight;
 	
@@ -19,6 +19,8 @@ public class Koinobori : MonoBehaviour
 	{
 		initialHeight = transform.position.y;
 		currentFallSpeed = initialFallSpeed;
+		
+		GameManager.instance.Register(this);
 	}
 
 	private void Update()
@@ -76,5 +78,27 @@ public class Koinobori : MonoBehaviour
 		{
 			isFalling = false;
 		}
+	}
+	
+	private Vector3 initialPosition;
+	private Quaternion initialRotation;
+	private Vector3 initialScale;
+    
+	public void RegisterInitialState()
+	{
+		initialPosition = transform.position;
+		initialRotation = transform.rotation;
+		initialScale = transform.localScale;
+	}
+
+	public void ResetState()
+	{
+		transform.position = initialPosition;
+		transform.rotation = initialRotation;
+		transform.localScale = initialScale;
+		
+		currentFallSpeed = 0f;
+		currentRiseSpeed = 0f;
+		isFalling = false;
 	}
 }

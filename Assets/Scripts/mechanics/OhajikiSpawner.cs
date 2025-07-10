@@ -59,6 +59,7 @@ public class OhajikiSpawner : MonoBehaviour
 			{
 				Debug.Log("Ohajiki Teleport");
 				GameObject ohajiki = ohajikiQueue.Dequeue();
+				ohajiki.layer = 0;
 				ohajiki.transform.position = spawnPos;
 				ohajiki.transform.rotation = this.transform.rotation;
 			}

@@ -1,11 +1,14 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+    
     public System.Action OnLevelEnd;
     
-    public static GameManager instance;
+    private List<IResettable> resettables = new List<IResettable>();
     
     [SerializeField] private int totalLives = 3;
     [SerializeField] private int totalBalloons = 3;
@@ -37,6 +40,23 @@ public class GameManager : MonoBehaviour
         }
         
         instance = this;
+    }
+
+    public void Register(IResettable resettable)
+    {
+        if (!resettables.Contains(resettable))
+        {
+            resettables.Add(resettable);
+            resettable.ResetState();
+        }
+    }
+
+    public void ResetLevel()
+    {
+        foreach (var obj in resettables)
+        {
+            obj.ResetState();
+        }
     }
     
     public void DecreaseLives()

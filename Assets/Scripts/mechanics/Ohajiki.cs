@@ -1,7 +1,9 @@
 using UnityEngine;
 
-public class Ohajiki : MonoBehaviour
+public class Ohajiki : MonoBehaviour, IResettable
 {
+    [SerializeField] private bool original = false;
+    
     [SerializeField] private float speed = 2.0f;
 
     [SerializeField] private Vector2 xBound;
@@ -9,19 +11,21 @@ public class Ohajiki : MonoBehaviour
 
     [SerializeField] private float yKillBound = -30;
     
-    public bool cullable = false;
+    public bool isCullable = false;
     
     private Rigidbody rb;
     private bool isGrounded = true;
     
     void Start()
     {
-        GameManager.instance.OnLevelEnd += OnLevelEnded;
         rb = GetComponent<Rigidbody>();
         rb.isKinematic = true;
         
         xBound = new Vector2(-21, 274);
         zBound = new Vector2(-5, 5);
+        
+        if (original) GameManager.instance.Register(this);
+        else GameManager.instance.OnLevelEnd += OnLevelEnded;
     }
 
     bool IsOutOfBounds()
@@ -52,7 +56,12 @@ public class Ohajiki : MonoBehaviour
             rb.useGravity = true;
         } else if (transform.position.y < yKillBound)
         {
-            cullable = true;
+            if (original)
+            {
+                gameObject.SetActive(false);
+                return;
+            };
+            isCullable = true;
             gameObject.layer = 6;
             rb.isKinematic = true;
             rb.useGravity = false;
@@ -90,4 +99,29 @@ public class Ohajiki : MonoBehaviour
     //         rb.useGravity = true;
     //     }
     // }
+    
+    private Vector3 initialPosition;
+    private Quaternion initialRotation;
+    private Vector3 initialScale;
+    
+    public void RegisterInitialState()
+    {
+        initialPosition = transform.position;
+        initialRotation = transform.rotation;
+        initialScale = transform.localScale;
+    }
+
+    public void ResetState()
+    {
+        transform.position = initialPosition;
+        transform.rotation = initialRotation;
+        transform.localScale = initialScale;
+        
+        gameObject.SetActive(true);
+        isCullable = false;
+        gameObject.layer = 0;
+        isGrounded = true;
+        rb.isKinematic = true;
+        
+    }
 }
