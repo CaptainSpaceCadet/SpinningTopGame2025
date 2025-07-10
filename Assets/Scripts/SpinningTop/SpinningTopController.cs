@@ -68,6 +68,8 @@ public class SpinningTopController : MonoBehaviour
 	{
 		gameManager.DecreaseLives();
 		this.transform.position = respawnPoint;
+		this.transform.rotation = defaultRotation;
+		rb.angularVelocity = Vector3.zero;
 	}
 
 	private void Update()
