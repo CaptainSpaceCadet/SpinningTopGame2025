@@ -18,6 +18,8 @@ public class OhajikiSpawner : MonoBehaviour
 
 	private void Start()
 	{
+		GameManager.instance.OnLevelEnd += OnLevelEnd;
+		
 		// Instantiate ohajikiPrefab to get the size of a collider attached to the object
 		var temp = Instantiate(ohajikiPrefab);
 		var collider = temp.GetComponent<Collider>();
@@ -46,7 +48,7 @@ public class OhajikiSpawner : MonoBehaviour
 		for (int i = 0; i < ohajikiAmount; i++)
 		{
 			Vector3 localOffset = new Vector3(startX + i * spaceBetweenOhajikis, 0f, 0f);
-			Debug.Log(spaceBetweenOhajikis);
+			//Debug.Log(spaceBetweenOhajikis);
 			Vector3 spawnPos = transform.position + transform.TransformDirection(localOffset);
 
 			Instantiate(ohajikiPrefab, spawnPos, this.transform.rotation);
@@ -62,5 +64,10 @@ public class OhajikiSpawner : MonoBehaviour
 		Vector3 origin = transform.position;
 		Vector3 direction = transform.forward * 10.0f;
 		Gizmos.DrawRay(origin, direction);
+	}
+
+	private void OnLevelEnd()
+	{
+		gameObject.SetActive(false);
 	}
 }

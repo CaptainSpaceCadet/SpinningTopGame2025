@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class SpinningTopController : MonoBehaviour
 {
+	[SerializeField] private GameManager gameManager;
+	
 	private Vector2 m_moveInput = Vector2.zero;
 	private Vector2 m_currentDirection = Vector2.zero;
 	private float speed = 0f;
@@ -64,6 +66,7 @@ public class SpinningTopController : MonoBehaviour
 
 	private void Respawn()
 	{
+		gameManager.DecreaseLives();
 		this.transform.position = respawnPoint;
 	}
 
@@ -103,7 +106,7 @@ public class SpinningTopController : MonoBehaviour
 
 	private void Move(Vector2 velocity)
 	{
-		// …•½•ûŒü‚Ì‚İè“®ˆÚ“®iƒWƒƒƒ“ƒv‚âd—Í‚ÍRigidbody‚É”C‚¹‚éj
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚İè“®ï¿½Ú“ï¿½ï¿½iï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½dï¿½Í‚ï¿½Rigidbodyï¿½É”Cï¿½ï¿½ï¿½ï¿½j
 		Vector3 move = new Vector3(velocity.x, 0, velocity.y) * Time.deltaTime;
 		rb.MovePosition(rb.position + move);
 
