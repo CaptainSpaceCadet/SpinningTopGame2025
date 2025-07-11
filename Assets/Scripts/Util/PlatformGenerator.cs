@@ -1,29 +1,60 @@
-using UnityEditor;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+using UnityEngine;
+
 public class PlatformGenerator : MonoBehaviour
 {
-	public int x_size = 30;
-	public int z_size = 30;
-	// Start is called once before the first execution of Update after the MonoBehaviour is created
-	void Start()
-	{
+	[SerializeField] private Vector3 scale;
+	
+	[SerializeField] private int x_size = 30;
+	[SerializeField] private int z_size = 30;
 
+	[SerializeField] private Vector2Int[] holesXBound;
+	[SerializeField] private Vector2Int[] holesZBound;
+
+	public void Start()
+	{
+		// GeneratePlatform();
 	}
 
 	public void GeneratePlatform()
 	{
-		for (int x = -x_size / 2; x < x_size / 2; x++)
+		for (int x = -x_size / 2; x <= x_size / 2; x++)
 		{
-			for (int z = -z_size / 2; z < z_size / 2; z++)
+			for (int z = -z_size / 2; z <= z_size / 2; z++)
 			{
+				
+				for (int i = 0; i < holesXBound.Length; i++)
+				{
+					if (x > holesXBound[i].x && x < holesXBound[i].y
+					                         && z > holesZBound[i].x && z < holesZBound[i].y) goto skip_cube;
+				}
+				
+				// Add cube
 				Vector3 position = new Vector3(x, 0, z);
 				GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 				cube.transform.position = position;
 				cube.transform.SetParent(this.transform);
+
+				skip_cube:;
 			}
 		}
+		
+		transform.localScale = scale;
 	}
-
-
+	
+	public void DeletePlatform()
+	{
+		for (int i = 0; i < transform.childCount; i++)
+		{
+			#if UNITY_EDITOR
+			DestroyImmediate(transform.GetChild(i).gameObject);
+			#else
+			Destroy(transform.GetChild(i).gameObject);
+			#endif
+		}
+	}
 }

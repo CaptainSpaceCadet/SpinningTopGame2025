@@ -6,6 +6,7 @@ public class Balloon : MonoBehaviour
 	{
 		if (collision.gameObject.CompareTag("player"))
 		{
+			GameManager.instance.IncreaseBalloons();
 			Destroy(gameObject);
 		}
 	}

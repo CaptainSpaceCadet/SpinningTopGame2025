@@ -9,10 +9,15 @@ public class PlatformGeneratorEditor : Editor
 	{
 		DrawDefaultInspector();
 
-		PlatformGenerator generator = (PlatformGenerator)target;
+		PlatformGenerator generator = (PlatformGenerator) target;
 		if (GUILayout.Button("Generate Platform"))
 		{
 			generator.GeneratePlatform();
+		}
+
+		if (GUILayout.Button("Delete Platform"))
+		{
+			generator.DeletePlatform();
 		}
 	}
 }

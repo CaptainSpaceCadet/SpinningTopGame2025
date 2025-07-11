@@ -22,7 +22,7 @@ public class SpinningTopController : MonoBehaviour
 	[Header("Ground check distance")]
 	[SerializeField] private float groundCheckDistance = 0.1f;
 	[Header("Y coordinate point where the spinning top respawns")]
-	[SerializeField] private float respawnThreshold = -10f;
+	[SerializeField] private float respawnThreshold = -30f;
 	private float acceleration => maxSpeed / timeToMaxSpeed;
 	private float deceleration => maxSpeed / inertiaTime;
 	private Quaternion defaultRotation;
@@ -64,10 +64,14 @@ public class SpinningTopController : MonoBehaviour
 
 	private void Respawn()
 	{
+		GameManager.instance.DecreaseLives();
 		this.transform.position = respawnPoint;
+		this.transform.rotation = defaultRotation;
+		rb.angularVelocity = Vector3.zero;
+		//rb.linearVelocity = Vector3.zero;
 	}
 
-	private void Update()
+	private void FixedUpdate()
 	{
 		if (CheckOutofBounds()) Respawn();
 		// Ground check
@@ -103,7 +107,7 @@ public class SpinningTopController : MonoBehaviour
 
 	private void Move(Vector2 velocity)
 	{
-		// …•½•ûŒü‚Ì‚İè“®ˆÚ“®iƒWƒƒƒ“ƒv‚âd—Í‚ÍRigidbody‚É”C‚¹‚éj
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚İè“®ï¿½Ú“ï¿½ï¿½iï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½dï¿½Í‚ï¿½Rigidbodyï¿½É”Cï¿½ï¿½ï¿½ï¿½j
 		Vector3 move = new Vector3(velocity.x, 0, velocity.y) * Time.deltaTime;
 		rb.MovePosition(rb.position + move);
 
