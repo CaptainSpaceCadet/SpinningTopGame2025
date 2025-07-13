@@ -72016,8 +72016,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd9812833109435429480cd555759c61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scale: {x: 0, y: 0, z: 0}
   x_size: 30
   z_size: 30
+  holesXBound: []
+  holesZBound: []
 --- !u!4 &1618964384
 Transform:
   m_ObjectHideFlags: 0
@@ -78911,6 +78914,7 @@ MonoBehaviour:
   directionLerpSpeed: 5
   jumpForce: 5
   groundCheckDistance: 0.1
+  respawnThreshold: -30
 --- !u!114 &1724655166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79044,8 +79048,12 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 057f61d6-f8e6-4be2-b650-f2c5090b7f67
+    m_ActionName: 'Player/Jump1[/Keyboard/space,/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth]'
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}

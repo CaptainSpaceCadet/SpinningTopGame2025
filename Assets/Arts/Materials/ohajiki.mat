@@ -83,7 +83,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AddPrecomputedVelocity: 0
-    - _Alpha: 0.59
+    - _Alpha: 0.71
     - _AlphaClip: 0
     - _AlphaMax: 1
     - _AlphaToMask: 0
