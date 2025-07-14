@@ -12,28 +12,33 @@ public class OhajikiSpawner : MonoBehaviour
 	[SerializeField] private float spawnRateInSeconds = 2f;
 	[Header("This property is automatically set if a collider is available")]
 	[SerializeField] private float spaceBetweenOhajikis = 2.0f;
+
+	[SerializeField] private GameObject[] initialOhajikis;
 	private GameObject ohajikiGroup;
 
 	private bool canSpawn;
 
-	Queue<GameObject> ohajikiQueue = new Queue<GameObject>();
+	private Queue<GameObject> ohajikiQueue;
 
 	private void Start()
 	{
-		GameManager.instance.OnLevelEnd += OnLevelEnd;
+		GameManager.instance.OnLevelStart += OnLevelStarted;
+		GameManager.instance.OnLevelEnd += OnLevelEnded;
 		
 		// Instantiate ohajikiPrefab to get the size of a collider attached to the object
 		var temp = Instantiate(ohajikiPrefab);
 		var collider = temp.GetComponent<Collider>();
+		
 		spaceBetweenOhajikis = collider?.bounds.size.x ?? spaceBetweenOhajikis;
 		Destroy(temp);
 
+		ohajikiQueue = new Queue<GameObject>(initialOhajikis);
 		canSpawn = true;
 	}
 
 	private void Update()
 	{
-		if(canSpawn) SpawnOhajiki();
+		if (canSpawn) SpawnOhajiki();
 	}
 
 	// This might need a serious optimization
@@ -59,9 +64,9 @@ public class OhajikiSpawner : MonoBehaviour
 			{
 				Debug.Log("Ohajiki Teleport");
 				GameObject ohajiki = ohajikiQueue.Dequeue();
-				ohajiki.layer = 0;
 				ohajiki.transform.position = spawnPos;
-				ohajiki.transform.rotation = this.transform.rotation;
+				ohajiki.transform.rotation = transform.rotation;
+				ohajiki.GetComponent<Ohajiki>().SetTeleportable();
 			}
 		}
 
@@ -77,7 +82,12 @@ public class OhajikiSpawner : MonoBehaviour
 		Gizmos.DrawRay(origin, direction);
 	}
 
-	private void OnLevelEnd()
+	private void OnLevelStarted()
+	{
+		gameObject.SetActive(true);
+	}
+	
+	private void OnLevelEnded()
 	{
 		gameObject.SetActive(false);
 	}

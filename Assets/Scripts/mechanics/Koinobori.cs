@@ -20,8 +20,8 @@ public class Koinobori : MonoBehaviour
 		initialHeight = transform.position.y;
 		currentFallSpeed = initialFallSpeed;
 		
-		ResetToInitialState();
-		GameManager.instance.OnLevelStart += ResetToInitialState;
+		RecordInitialState();
+		GameManager.instance.OnLevelStart += OnLevelStarted;
 	}
 
 	private void Update()
@@ -80,20 +80,22 @@ public class Koinobori : MonoBehaviour
 		}
 	}
 	
-	private Transform initialTransform;
+	private Vector3 initialPosition;
+	private Quaternion initialRotation;
+	private Vector3 initialLocalScale;
 	
 	private void RecordInitialState()
 	{
-		initialTransform.position = transform.position;
-		initialTransform.rotation = transform.rotation;
-		initialTransform.localScale = transform.localScale;
+		initialPosition = transform.position;
+		initialRotation = transform.rotation;
+		initialLocalScale = transform.localScale;
 	}
 
 	private void ResetToInitialState()
 	{
-		transform.position = initialTransform.position;
-		transform.rotation = initialTransform.rotation;
-		transform.localScale = initialTransform.localScale;
+		transform.position = initialPosition;
+		transform.rotation = initialRotation;
+		transform.localScale = initialLocalScale;
 		
 		currentFallSpeed = 0f;
 		currentRiseSpeed = 0f;

@@ -32,8 +32,9 @@ public class Ohajiki : MonoBehaviour
         xBound = new Vector2(-21, 274);
         zBound = new Vector2(-5, 5);
         
-        ResetToInitialState();
-        GameManager.instance.OnLevelStart += ResetToInitialState;
+        RecordInitialState();
+        GameManager.instance.OnLevelStart += OnLevelStarted;
+        GameManager.instance.OnLevelEnd += OnLevelEnded;
     }
 
     bool IsOutOfBounds()
@@ -66,7 +67,7 @@ public class Ohajiki : MonoBehaviour
             {
                 gameObject.SetActive(false);
                 return;
-            };
+            }
             
             SetTeleportable();
         }
@@ -82,7 +83,7 @@ public class Ohajiki : MonoBehaviour
     //     Destroy(gameObject);
     // }
 
-    void SetGrounded()
+    public void SetGrounded()
     {
         state = OhajikiState.Grounded;
         
@@ -94,7 +95,7 @@ public class Ohajiki : MonoBehaviour
         rb.useGravity = false;
     }
 
-    void SetFalling()
+    public void SetFalling()
     {
         state = OhajikiState.Falling;
         
@@ -106,7 +107,7 @@ public class Ohajiki : MonoBehaviour
         rb.useGravity = true;
     }
 
-    void SetTeleportable()
+    public void SetTeleportable()
     {
         state = OhajikiState.Teleportable;
         
@@ -140,22 +141,24 @@ public class Ohajiki : MonoBehaviour
     //     }
     // }
     
-    private Transform initialTransform;
+    private Vector3 initialPosition;
+    private Quaternion initialRotation;
+    private Vector3 initialLocalScale;
 	
     private void RecordInitialState()
     {
-        initialTransform.position = transform.position;
-        initialTransform.rotation = transform.rotation;
-        initialTransform.localScale = transform.localScale;
+        initialPosition = transform.position;
+        initialRotation = transform.rotation;
+        initialLocalScale = transform.localScale;
     }
 
     private void ResetToInitialState()
     {
         gameObject.SetActive(true);
         
-        transform.position = initialTransform.position;
-        transform.rotation = initialTransform.rotation;
-        transform.localScale = initialTransform.localScale;
+        transform.position = initialPosition;
+        transform.rotation = initialRotation;
+        transform.localScale = initialLocalScale;
         
         SetGrounded();
     }

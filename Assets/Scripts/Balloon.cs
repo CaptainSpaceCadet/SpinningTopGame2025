@@ -3,21 +3,23 @@ using UnityEngine;
 
 public class Balloon : MonoBehaviour
 {
-	Transform initialTransform;
+	private Vector3 initialPosition;
+	private Quaternion initialRotation;
+	private Vector3 initialLocalScale;
 	
 	private void RecordInitialState()
 	{
-		initialTransform.position = transform.position;
-		initialTransform.rotation = transform.rotation;
-		initialTransform.localScale = transform.localScale;
+		initialPosition = transform.position;
+		initialRotation = transform.rotation;
+		initialLocalScale = transform.localScale;
 	}
 
 	private void ResetToInitialState()
 	{
 		gameObject.SetActive(true);
-		transform.position = initialTransform.position;
-		transform.rotation = initialTransform.rotation;
-		transform.localScale = initialTransform.localScale;
+		transform.position = initialPosition;
+		transform.rotation = initialRotation;
+		transform.localScale = initialLocalScale;
 	}
 
 	private void OnLevelStarted()
@@ -27,6 +29,7 @@ public class Balloon : MonoBehaviour
 
 	private void Start()
 	{
+		RecordInitialState();
 		GameManager.instance.OnLevelStart += OnLevelStarted;
 	}
 

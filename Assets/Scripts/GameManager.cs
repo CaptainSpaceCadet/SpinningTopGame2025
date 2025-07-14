@@ -83,11 +83,27 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void GameOver()
+    private void GameStarted()
+    {
+        lossScreen.SetActive(false);
+        winScreen.SetActive(false);
+        
+        // resources
+        currentLives = totalLives;
+        RenderLives(currentLives);
+        currentBalloons = 0;
+        RenderBalloons(currentBalloons, balloonSprites);
+    } 
+
+    private void GameEnded()
     {
         lifeContainer.SetActive(false);
         balloonContainer.SetActive(false);
-        
+    }
+
+    public void GameOver()
+    {
+        GameEnded();
         lossScreen.SetActive(true);
         winScreen.SetActive(false);
         
@@ -100,14 +116,18 @@ public class GameManager : MonoBehaviour
 
     public void GameWon()
     {
-        lifeContainer.SetActive(false);
-        balloonContainer.SetActive(false);
-        
+        GameEnded();
         lossScreen.SetActive(false);
         winScreen.SetActive(true);
         
         OnLevelEnd?.Invoke();
         
         Debug.Log("Game Won");
+    }
+
+    public void ResetLevel()
+    {
+        GameStarted();
+        OnLevelStart?.Invoke();
     }
 }
