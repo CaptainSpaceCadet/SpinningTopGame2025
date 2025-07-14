@@ -5897,6 +5897,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 619442861}
     m_Modifications:
+    - target: {fileID: 3110248955309800805, guid: a73c9ac44d114e64b908220831e87ac5, type: 3}
+      propertyPath: OverrideAttenuation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3110248955309800805, guid: a73c9ac44d114e64b908220831e87ac5, type: 3}
+      propertyPath: OverrideMaxDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5152396403619843214, guid: a73c9ac44d114e64b908220831e87ac5, type: 3}
       propertyPath: m_Name
       value: Fish1
@@ -16418,6 +16426,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 619442861}
     m_Modifications:
+    - target: {fileID: 3110248955309800805, guid: a73c9ac44d114e64b908220831e87ac5, type: 3}
+      propertyPath: OverrideAttenuation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3110248955309800805, guid: a73c9ac44d114e64b908220831e87ac5, type: 3}
+      propertyPath: OverrideMaxDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5152396403619843214, guid: a73c9ac44d114e64b908220831e87ac5, type: 3}
       propertyPath: m_Name
       value: Fish3
@@ -18759,8 +18775,8 @@ GameObject:
   m_Component:
   - component: {fileID: 963075646}
   - component: {fileID: 963075645}
-  - component: {fileID: 963075644}
   - component: {fileID: 963075647}
+  - component: {fileID: 963075648}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -18768,14 +18784,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &963075644
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963075643}
-  m_Enabled: 1
 --- !u!20 &963075645
 Camera:
   m_ObjectHideFlags: 0
@@ -18839,7 +18847,8 @@ Transform:
   m_LocalPosition: {x: 4.4, y: 20.21, z: -23.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2082094821}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 39.98, y: 0, z: 0}
 --- !u!114 &963075647
@@ -18886,6 +18895,20 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &963075648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963075643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 0}
 --- !u!1 &967775092
 GameObject:
   m_ObjectHideFlags: 0
@@ -28426,6 +28449,8 @@ MonoBehaviour:
   - {fileID: 1020922023}
   - {fileID: 958034624}
   - {fileID: 7849585}
+  winEmitter: {fileID: 0}
+  loseEmitter: {fileID: 0}
 --- !u!4 &1503594906
 Transform:
   m_ObjectHideFlags: 0
@@ -40675,6 +40700,69 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2075021806}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2082094819
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2082094821}
+  - component: {fileID: 2082094820}
+  m_Layer: 0
+  m_Name: BGMSoundSource
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2082094820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082094819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 267189229
+      Data2: 1087569868
+      Data3: -1995475277
+      Data4: 885369731
+    Path: "event:/\u796D\u308A\u30E4\u30B0\u30E9"
+  Event: 
+  EventPlayTrigger: 1
+  EventStopTrigger: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 1
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 3
+--- !u!4 &2082094821
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082094819}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 963075646}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2082332652
 GameObject:
   m_ObjectHideFlags: 0
@@ -41236,6 +41324,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 619442861}
     m_Modifications:
+    - target: {fileID: 3110248955309800805, guid: a73c9ac44d114e64b908220831e87ac5, type: 3}
+      propertyPath: OverrideAttenuation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3110248955309800805, guid: a73c9ac44d114e64b908220831e87ac5, type: 3}
+      propertyPath: OverrideMaxDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5152396403619843214, guid: a73c9ac44d114e64b908220831e87ac5, type: 3}
       propertyPath: m_Name
       value: Fish2

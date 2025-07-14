@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{475acaf2-92a3-42d3-89d4-ef442fd2d4ea}">
+		<property name="assetPath">
+			<value>coma_拳銃を弾き飛ばされる.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.2</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{5558b01a-1c14-4afc-acef-c18ff45356bc}</destination>
+		</relationship>
+	</object>
+</objects>

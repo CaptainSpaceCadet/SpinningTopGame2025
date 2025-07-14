@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 2c7db1189d486bf46a7e1ff73c3b15c3, type: 3}
       propertyPath: m_Name
-      value: koma
+      value: Koma
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 2c7db1189d486bf46a7e1ff73c3b15c3, type: 3}
       propertyPath: m_TagString
@@ -75,6 +75,18 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2c7db1189d486bf46a7e1ff73c3b15c3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6250246419513969956}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2c7db1189d486bf46a7e1ff73c3b15c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -1762690725018775749}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2c7db1189d486bf46a7e1ff73c3b15c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -2827752829487616875}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2c7db1189d486bf46a7e1ff73c3b15c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 839362397292354231}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2c7db1189d486bf46a7e1ff73c3b15c3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3062365264924523442}
   m_SourcePrefab: {fileID: 100100000, guid: 2c7db1189d486bf46a7e1ff73c3b15c3, type: 3}
 --- !u!1 &967069245148598158 stripped
 GameObject:
@@ -214,6 +226,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 057f61d6-f8e6-4be2-b650-f2c5090b7f67
+    m_ActionName: 'Player/Jump1[/Keyboard/space]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -240,6 +256,9 @@ MonoBehaviour:
   jumpForce: 9.05
   groundCheckDistance: 0.1
   respawnThreshold: -10
+  moveSoundEmitter: {fileID: -2827752829487616875}
+  jumpSoundEmitter: {fileID: 839362397292354231}
+  destroySoundEmitter: {fileID: -1762690725018775749}
 --- !u!114 &6658485257457234505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,3 +320,110 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-1762690725018775749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 967069245148598158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -839323138
+      Data2: 1157827888
+      Data3: 1329286806
+      Data4: -655798537
+    Path: event:/KomaDestory
+  Event: 
+  EventPlayTrigger: 12
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &-2827752829487616875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 967069245148598158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1011194169
+      Data2: 1080289240
+      Data3: 1271296131
+      Data4: 1579790658
+    Path: event:/KomaMoved
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &839362397292354231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 967069245148598158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1243281090
+      Data2: 1293394245
+      Data3: 742191010
+      Data4: 593274704
+    Path: event:/Jump
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &3062365264924523442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 967069245148598158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 0}

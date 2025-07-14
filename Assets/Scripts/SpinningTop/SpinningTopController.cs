@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,6 +24,12 @@ public class SpinningTopController : MonoBehaviour
 	[SerializeField] private float groundCheckDistance = 0.1f;
 	[Header("Y coordinate point where the spinning top respawns")]
 	[SerializeField] private float respawnThreshold = -30f;
+
+	[Header("JumpSoundEmitter")] 
+	[SerializeField] private StudioEventEmitter moveSoundEmitter;
+	[SerializeField] private StudioEventEmitter jumpSoundEmitter;
+	[SerializeField] private StudioEventEmitter destroySoundEmitter;
+	
 	private float acceleration => maxSpeed / timeToMaxSpeed;
 	private float deceleration => maxSpeed / inertiaTime;
 	private Quaternion defaultRotation;
@@ -46,11 +53,17 @@ public class SpinningTopController : MonoBehaviour
 
 	public void OnMove(InputAction.CallbackContext context)
 	{
+		if(!moveSoundEmitter.IsPlaying())
+			moveSoundEmitter.Play();
+		
 		m_moveInput = context.ReadValue<Vector2>();
 	}
 
 	public void OnJump(InputAction.CallbackContext context)
 	{
+		if(!jumpSoundEmitter.IsPlaying())
+			jumpSoundEmitter.Play();
+		
 		if (context.started && isGrounded)
 		{
 			rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
@@ -64,6 +77,7 @@ public class SpinningTopController : MonoBehaviour
 
 	private void Respawn()
 	{
+		destroySoundEmitter.Play();
 		GameManager.instance.DecreaseLives();
 		this.transform.position = respawnPoint;
 		this.transform.rotation = defaultRotation;
