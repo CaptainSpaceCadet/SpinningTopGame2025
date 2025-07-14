@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class SpinningTopController : MonoBehaviour, IResettable
+public class SpinningTopController : MonoBehaviour
 {
 	private Vector2 m_moveInput = Vector2.zero;
 	private Vector2 m_currentDirection = Vector2.zero;
@@ -42,8 +42,6 @@ public class SpinningTopController : MonoBehaviour, IResettable
 		}
 
 		respawnPoint = this.transform.position;
-		
-		GameManager.instance.Register(this);
 	}
 
 	public void OnMove(InputAction.CallbackContext context)
@@ -122,14 +120,5 @@ public class SpinningTopController : MonoBehaviour, IResettable
 		//	targetRotation *= Quaternion.AngleAxis(tiltAngle, right);
 		//	transform.rotation = targetRotation;
 		//}
-	}
-    
-	public void RegisterInitialState()
-	{
-	}
-
-	public void ResetState()
-	{
-		Respawn();
 	}
 }

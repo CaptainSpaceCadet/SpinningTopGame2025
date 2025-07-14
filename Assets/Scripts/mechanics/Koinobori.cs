@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Koinobori : MonoBehaviour, IResettable
+public class Koinobori : MonoBehaviour
 {
 	[SerializeField] private bool fallForever = false;
 	
@@ -20,7 +20,8 @@ public class Koinobori : MonoBehaviour, IResettable
 		initialHeight = transform.position.y;
 		currentFallSpeed = initialFallSpeed;
 		
-		GameManager.instance.Register(this);
+		ResetToInitialState();
+		GameManager.instance.OnLevelStart += ResetToInitialState;
 	}
 
 	private void Update()
@@ -34,13 +35,13 @@ public class Koinobori : MonoBehaviour, IResettable
 	private void Fall()
 	{
 		currentFallSpeed += acceleration * Time.deltaTime;
-		transform.position += Vector3.down * currentFallSpeed * Time.deltaTime;
+		transform.position += Vector3.down * (currentFallSpeed * Time.deltaTime);
 	}
 
 	private void Rise()
 	{
 		currentRiseSpeed += acceleration * Time.deltaTime;
-		transform.position += Vector3.up * currentRiseSpeed * Time.deltaTime;
+		transform.position += Vector3.up * (currentRiseSpeed * Time.deltaTime);
 	}
 
 	private void OnCollisionEnter(Collision collision)
@@ -50,8 +51,7 @@ public class Koinobori : MonoBehaviour, IResettable
 			ContactPoint contact = collision.contacts[0];
 			// normal pointing outward
 			Vector3 normal = -contact.normal.normalized;
-
-
+			
 			Vector3 up = Vector3.up;
 
 			// find a degree between world up vector and normal
@@ -80,25 +80,28 @@ public class Koinobori : MonoBehaviour, IResettable
 		}
 	}
 	
-	private Vector3 initialPosition;
-	private Quaternion initialRotation;
-	private Vector3 initialScale;
-    
-	public void RegisterInitialState()
+	private Transform initialTransform;
+	
+	private void RecordInitialState()
 	{
-		initialPosition = transform.position;
-		initialRotation = transform.rotation;
-		initialScale = transform.localScale;
+		initialTransform.position = transform.position;
+		initialTransform.rotation = transform.rotation;
+		initialTransform.localScale = transform.localScale;
 	}
 
-	public void ResetState()
+	private void ResetToInitialState()
 	{
-		transform.position = initialPosition;
-		transform.rotation = initialRotation;
-		transform.localScale = initialScale;
+		transform.position = initialTransform.position;
+		transform.rotation = initialTransform.rotation;
+		transform.localScale = initialTransform.localScale;
 		
 		currentFallSpeed = 0f;
 		currentRiseSpeed = 0f;
 		isFalling = false;
+	}
+
+	private void OnLevelStarted()
+	{
+		ResetToInitialState();
 	}
 }

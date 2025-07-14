@@ -1,20 +1,28 @@
 using UnityEngine;
 
-public class Ohajiki : MonoBehaviour, IResettable
+public class Ohajiki : MonoBehaviour
 {
+    public enum OhajikiState
+    {
+        Grounded, Falling, Teleportable
+    }
+    
     [SerializeField] private bool original = false;
     
     [SerializeField] private float speed = 2.0f;
 
+    // TODO: Fix this!!!
     [SerializeField] private Vector2 xBound;
     [SerializeField] private Vector2 zBound;
 
+    // TODO: Fix this!!!
     [SerializeField] private float yKillBound = -30;
     
-    public bool isCullable = false;
+    public bool isTeleportable = false;
     
     private Rigidbody rb;
-    private bool isGrounded = true;
+    
+    private OhajikiState state = OhajikiState.Grounded;
     
     void Start()
     {
@@ -24,8 +32,8 @@ public class Ohajiki : MonoBehaviour, IResettable
         xBound = new Vector2(-21, 274);
         zBound = new Vector2(-5, 5);
         
-        if (original) GameManager.instance.Register(this);
-        else GameManager.instance.OnLevelEnd += OnLevelEnded;
+        ResetToInitialState();
+        GameManager.instance.OnLevelStart += ResetToInitialState;
     }
 
     bool IsOutOfBounds()
@@ -47,35 +55,67 @@ public class Ohajiki : MonoBehaviour, IResettable
     void Update()
     {
         //Debug.Log(transform.position.x); // for some reason without this line it doesn't work!!!
-        if (isGrounded && transform.position.x > 23)
+        if (state == OhajikiState.Grounded && transform.position.x > 23)
         {
             Debug.Log("Ohajiki is out of bounds");
-            isGrounded = false;
-            
-            rb.isKinematic = false;
-            rb.useGravity = true;
-        } else if (transform.position.y < yKillBound)
+            SetFalling();
+        } else if (transform.position.y < yKillBound) 
         {
+            // TODO: FIX THIS!!!
             if (original)
             {
                 gameObject.SetActive(false);
                 return;
             };
-            isCullable = true;
-            gameObject.layer = 6;
-            rb.isKinematic = true;
-            rb.useGravity = false;
+            
+            SetTeleportable();
         }
     }
     
     void FixedUpdate()
     {
-        if (isGrounded) transform.position += this.transform.forward * (speed * Time.deltaTime);
+        if (state == OhajikiState.Grounded) transform.position += this.transform.forward * (speed * Time.deltaTime);
     }
 
-    void OnLevelEnded()
+    // void OnLevelEnded()
+    // {
+    //     Destroy(gameObject);
+    // }
+
+    void SetGrounded()
     {
-        Destroy(gameObject);
+        state = OhajikiState.Grounded;
+        
+        // layer
+        gameObject.layer = 0;
+        
+        // physics
+        rb.isKinematic = true;
+        rb.useGravity = false;
+    }
+
+    void SetFalling()
+    {
+        state = OhajikiState.Falling;
+        
+        // layer
+        gameObject.layer = 0;
+        
+        // physics
+        rb.isKinematic = false;
+        rb.useGravity = true;
+    }
+
+    void SetTeleportable()
+    {
+        state = OhajikiState.Teleportable;
+        
+        // layer
+        gameObject.layer = 6;
+        
+        // physics
+        rb.isKinematic = true;
+        rb.useGravity = false;
     }
 
     // too lazy to get this to work properly
@@ -100,28 +140,34 @@ public class Ohajiki : MonoBehaviour, IResettable
     //     }
     // }
     
-    private Vector3 initialPosition;
-    private Quaternion initialRotation;
-    private Vector3 initialScale;
-    
-    public void RegisterInitialState()
+    private Transform initialTransform;
+	
+    private void RecordInitialState()
     {
-        initialPosition = transform.position;
-        initialRotation = transform.rotation;
-        initialScale = transform.localScale;
+        initialTransform.position = transform.position;
+        initialTransform.rotation = transform.rotation;
+        initialTransform.localScale = transform.localScale;
     }
 
-    public void ResetState()
+    private void ResetToInitialState()
     {
-        transform.position = initialPosition;
-        transform.rotation = initialRotation;
-        transform.localScale = initialScale;
-        
         gameObject.SetActive(true);
-        isCullable = false;
-        gameObject.layer = 0;
-        isGrounded = true;
-        rb.isKinematic = true;
         
+        transform.position = initialTransform.position;
+        transform.rotation = initialTransform.rotation;
+        transform.localScale = initialTransform.localScale;
+        
+        SetGrounded();
     }
+
+    private void OnLevelStarted()
+    {
+        ResetToInitialState();
+    }
+
+    private void OnLevelEnded()
+    {
+        gameObject.SetActive(false);
+    }
+    
 }
