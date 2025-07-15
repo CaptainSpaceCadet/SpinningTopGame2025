@@ -17,12 +17,14 @@ public class Ohajiki : MonoBehaviour
 
     // TODO: Fix this!!!
     [SerializeField] private float yKillBound = -30;
+
+    [SerializeField] private float dx = 0.0f;
     
     public bool isTeleportable = false;
     
     private Rigidbody rb;
     
-    private OhajikiState state = OhajikiState.Grounded;
+    [SerializeField] private OhajikiState state = OhajikiState.Grounded;
     
     void Start()
     {
@@ -75,7 +77,15 @@ public class Ohajiki : MonoBehaviour
     
     void FixedUpdate()
     {
-        if (state == OhajikiState.Grounded) transform.position += this.transform.forward * (speed * Time.deltaTime);
+        if (state == OhajikiState.Grounded)
+        {
+            dx = (this.transform.forward * (speed * Time.deltaTime)).magnitude;
+            transform.position += this.transform.forward * (speed * Time.deltaTime);
+        }
+        else
+        {
+            dx = 0.0f;
+        }
     }
 
     // void OnLevelEnded()

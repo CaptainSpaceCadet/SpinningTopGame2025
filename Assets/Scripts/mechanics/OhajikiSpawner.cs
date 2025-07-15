@@ -14,11 +14,14 @@ public class OhajikiSpawner : MonoBehaviour
 	[SerializeField] private float spaceBetweenOhajikis = 2.0f;
 
 	[SerializeField] private GameObject[] initialOhajikis;
+	[SerializeField] private Ohajiki[] initialOhajikisComp;
+	
 	private GameObject ohajikiGroup;
 
 	private bool canSpawn;
 
 	private Queue<GameObject> ohajikiQueue;
+	private Queue<Ohajiki> ohajikiQueueComp;
 
 	private void Start()
 	{
@@ -33,6 +36,7 @@ public class OhajikiSpawner : MonoBehaviour
 		Destroy(temp);
 
 		ohajikiQueue = new Queue<GameObject>(initialOhajikis);
+		ohajikiQueueComp = new Queue<Ohajiki>(initialOhajikisComp);
 		canSpawn = true;
 	}
 
@@ -58,15 +62,21 @@ public class OhajikiSpawner : MonoBehaviour
 			//Debug.Log(spaceBetweenOhajikis);
 			Vector3 spawnPos = transform.position + transform.TransformDirection(localOffset);
 
-			if (ohajikiQueue.Count < 1 || ohajikiQueue.Peek().layer != 6) 
-				ohajikiQueue.Enqueue(Instantiate(ohajikiPrefab, spawnPos, this.transform.rotation));
+			if (ohajikiQueue.Count < 1 || ohajikiQueue.Peek().layer != 6)
+			{
+				GameObject ohajiki = Instantiate(ohajikiPrefab, spawnPos, transform.rotation);
+				ohajikiQueue.Enqueue(ohajiki);
+				ohajikiQueueComp.Enqueue(ohajiki.GetComponent<Ohajiki>());
+			}
 			else
 			{
 				Debug.Log("Ohajiki Teleport");
 				GameObject ohajiki = ohajikiQueue.Dequeue();
+				Ohajiki ohajikiComp = ohajikiQueueComp.Dequeue();
 				ohajiki.transform.position = spawnPos;
 				ohajiki.transform.rotation = transform.rotation;
-				ohajiki.GetComponent<Ohajiki>().SetTeleportable();
+				//ohajiki.GetComponent<Ohajiki>().transform.position = spawnPos;
+				ohajikiComp.SetGrounded();
 			}
 		}
 
