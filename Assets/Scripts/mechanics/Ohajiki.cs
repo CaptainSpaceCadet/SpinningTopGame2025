@@ -1,76 +1,47 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Ohajiki : MonoBehaviour
 {
-    public enum OhajikiState
+    // state
+    private enum OhajikiState
     {
         Grounded, Falling, Teleportable
     }
+    private OhajikiState state = OhajikiState.Grounded;
     
-    [SerializeField] private bool original = false;
-    
+    // Fields shown in the inspector
+    [Header("Ohajiki options")]
     [SerializeField] private float speed = 2.0f;
-
-    // TODO: Fix this!!!
-    [SerializeField] private Vector2 xBound;
-    [SerializeField] private Vector2 zBound;
-
-    // TODO: Fix this!!!
     [SerializeField] private float yKillBound = -30;
-
-    [SerializeField] private float dx = 0.0f;
     
-    public bool isTeleportable = false;
+    // Assigned during creation
+    [Header("Assigned by instantiator")]
+    public Collider groundedBounds;
     
+    // Private members
     private Rigidbody rb;
     
-    [SerializeField] private OhajikiState state = OhajikiState.Grounded;
+    // Initial transform
+    private Vector3 initialPosition;
+    private Quaternion initialRotation;
+    private Vector3 initialLocalScale;
     
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.isKinematic = true;
         
-        xBound = new Vector2(-21, 274);
-        zBound = new Vector2(-5, 5);
-        
         RecordInitialState();
         GameManager.instance.OnLevelStart += OnLevelStarted;
         GameManager.instance.OnLevelEnd += OnLevelEnded;
     }
-
-    bool IsOutOfBounds()
-    {
-        float x = transform.position.x;
-        float z = transform.position.z;
-        
-        float xMin = Mathf.Min(xBound.x, xBound.y);
-        float xMax = Mathf.Max(xBound.x, xBound.y);
-        float zMin = Mathf.Min(zBound.x, zBound.y);
-        float zMax = Mathf.Max(zBound.x, zBound.y);
-
-        return (x < xMin || x > xMax ||
-                z < zMin || z > zMax);
-    }
-
     
-    // Update is called once per frame
     void Update()
     {
-        //Debug.Log(transform.position.x); // for some reason without this line it doesn't work!!!
-        if (state == OhajikiState.Grounded && transform.position.x > 23)
+        if (state == OhajikiState.Falling && transform.position.y < yKillBound)
         {
-            Debug.Log("Ohajiki is out of bounds");
-            SetFalling();
-        } else if (transform.position.y < yKillBound) 
-        {
-            // TODO: FIX THIS!!!
-            if (original)
-            {
-                gameObject.SetActive(false);
-                return;
-            }
-            
             SetTeleportable();
         }
     }
@@ -79,20 +50,11 @@ public class Ohajiki : MonoBehaviour
     {
         if (state == OhajikiState.Grounded)
         {
-            dx = (this.transform.forward * (speed * Time.deltaTime)).magnitude;
-            transform.position += this.transform.forward * (speed * Time.deltaTime);
-        }
-        else
-        {
-            dx = 0.0f;
+            transform.position += transform.forward * (speed * Time.deltaTime);
         }
     }
 
-    // void OnLevelEnded()
-    // {
-    //     Destroy(gameObject);
-    // }
-
+    // State functions
     public void SetGrounded()
     {
         state = OhajikiState.Grounded;
@@ -128,33 +90,8 @@ public class Ohajiki : MonoBehaviour
         rb.isKinematic = true;
         rb.useGravity = false;
     }
-
-    // too lazy to get this to work properly
-    
-    // private void OnCollisionEnter(Collision collision)
-    // {
-    //     if (collision.gameObject.layer == 3)
-    //     {
-    //         isGrounded = true;
-    //         rb.linearVelocity = Vector3.zero;
-    //         rb.useGravity = false;
-    //     }
-    // }
-    //
-    // private void OnCollisionExit(Collision collision)
-    // {
-    //     if (collision.gameObject.layer == 3)
-    //     {
-    //         isGrounded = false;
-    //         rb.linearVelocity = Vector3.zero;
-    //         rb.useGravity = true;
-    //     }
-    // }
-    
-    private Vector3 initialPosition;
-    private Quaternion initialRotation;
-    private Vector3 initialLocalScale;
 	
+    // Reset functions
     private void RecordInitialState()
     {
         initialPosition = transform.position;
@@ -173,6 +110,7 @@ public class Ohajiki : MonoBehaviour
         SetGrounded();
     }
 
+    // Event functions
     private void OnLevelStarted()
     {
         ResetToInitialState();
@@ -182,5 +120,15 @@ public class Ohajiki : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
-    
+
+    private void OnTriggerExit(Collider other)
+    {
+        Debug.Log("Ohajiki TriggerExit");
+        Debug.Log(other.gameObject.name);
+        if (other == groundedBounds)
+        {
+            Debug.Log("Ohajiki TriggerExit Grounded");
+            SetFalling();
+        }
+    }
 }

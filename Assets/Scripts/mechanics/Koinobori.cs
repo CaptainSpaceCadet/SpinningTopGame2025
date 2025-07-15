@@ -8,16 +8,18 @@ public class Koinobori : MonoBehaviour
 	[SerializeField] private float theta = 30.0f;
 	[SerializeField] private float initialFallSpeed = 0.5f;
 	[SerializeField] private float acceleration = 0.5f;
-
-	private float initialHeight;
 	
+	// Private members
 	private float currentFallSpeed = 0f;
 	private float currentRiseSpeed = 0f;
 	private bool isFalling = false;
+	
+	private Vector3 initialPosition;
+	private Quaternion initialRotation;
+	private Vector3 initialLocalScale;
 
 	private void Start()
 	{
-		initialHeight = transform.position.y;
 		currentFallSpeed = initialFallSpeed;
 		
 		RecordInitialState();
@@ -29,9 +31,10 @@ public class Koinobori : MonoBehaviour
 		// start falling when the player is on top of koinobori, it keeps falling once it's touched
 		// - I think this looks really weird in practice
 		if (isFalling) Fall();
-		else if (transform.position.y < initialHeight) Rise();
+		else if (transform.position.y < initialPosition.y) Rise();
 	}
 
+	// Movement functions
 	private void Fall()
 	{
 		currentFallSpeed += acceleration * Time.deltaTime;
@@ -43,7 +46,32 @@ public class Koinobori : MonoBehaviour
 		currentRiseSpeed += acceleration * Time.deltaTime;
 		transform.position += Vector3.up * (currentRiseSpeed * Time.deltaTime);
 	}
+	
+	private void RecordInitialState()
+	{
+		initialPosition = transform.position;
+		initialRotation = transform.rotation;
+		initialLocalScale = transform.localScale;
+	}
 
+	// Reset functions
+	private void ResetToInitialState()
+	{
+		transform.position = initialPosition;
+		transform.rotation = initialRotation;
+		transform.localScale = initialLocalScale;
+		
+		currentFallSpeed = 0f;
+		currentRiseSpeed = 0f;
+		isFalling = false;
+	}
+
+	// Event functions
+	private void OnLevelStarted()
+	{
+		ResetToInitialState();
+	}
+	
 	private void OnCollisionEnter(Collision collision)
 	{
 		if (collision.gameObject.CompareTag("player"))
@@ -56,7 +84,7 @@ public class Koinobori : MonoBehaviour
 
 			// find a degree between world up vector and normal
 			// however, because I used box collider, this is either 0, 90, or 180
-			// so instead we could use normal == up, but i did this for the sake of generalization
+			// so instead we could use normal == up, but I did this for the sake of generalization
 			float angle = Vector3.Angle(normal, up);
 
 			Debug.Log(angle);
@@ -78,32 +106,5 @@ public class Koinobori : MonoBehaviour
 		{
 			isFalling = false;
 		}
-	}
-	
-	private Vector3 initialPosition;
-	private Quaternion initialRotation;
-	private Vector3 initialLocalScale;
-	
-	private void RecordInitialState()
-	{
-		initialPosition = transform.position;
-		initialRotation = transform.rotation;
-		initialLocalScale = transform.localScale;
-	}
-
-	private void ResetToInitialState()
-	{
-		transform.position = initialPosition;
-		transform.rotation = initialRotation;
-		transform.localScale = initialLocalScale;
-		
-		currentFallSpeed = 0f;
-		currentRiseSpeed = 0f;
-		isFalling = false;
-	}
-
-	private void OnLevelStarted()
-	{
-		ResetToInitialState();
 	}
 }

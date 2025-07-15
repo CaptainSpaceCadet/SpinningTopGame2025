@@ -2,71 +2,85 @@ using UnityEngine;
 using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
-using UnityEngine.UIElements;
 using System.Threading.Tasks;
 
 public class OhajikiSpawner : MonoBehaviour
 {
-	[SerializeField] private GameObject ohajikiPrefab;
-	[SerializeField] private int ohajikiAmount = 3; 
+	// Fields shown in the inspector
+	[Header("Spawning Settings")]
+	[SerializeField] private int ohajikiGroupSize = 3; 
 	[SerializeField] private float spawnRateInSeconds = 2f;
-	[Header("This property is automatically set if a collider is available")]
+	[Tooltip("This property is automatically set if a collider is available")]
 	[SerializeField] private float spaceBetweenOhajikis = 2.0f;
-
-	[SerializeField] private GameObject[] initialOhajikis;
-	[SerializeField] private Ohajiki[] initialOhajikisComp;
 	
-	private GameObject ohajikiGroup;
+	[Header("Ohajiki options")]
+	[SerializeField] private Collider groundedBounds;
 
+	[Header("Prefab")]
+	[SerializeField] private GameObject ohajikiPrefab;
+	
+	[Header("Initial State")]
+	[SerializeField] private GameObject[] initialOhajikis;
+	
+	// Private members
 	private bool canSpawn;
 
+	// References to spawned ohajiki
+	private Ohajiki[] initialOhajikisComp;
 	private Queue<GameObject> ohajikiQueue;
 	private Queue<Ohajiki> ohajikiQueueComp;
 
 	private void Start()
 	{
-		GameManager.instance.OnLevelStart += OnLevelStarted;
-		GameManager.instance.OnLevelEnd += OnLevelEnded;
-		
 		// Instantiate ohajikiPrefab to get the size of a collider attached to the object
 		var temp = Instantiate(ohajikiPrefab);
 		var collider = temp.GetComponent<Collider>();
 		
 		spaceBetweenOhajikis = collider?.bounds.size.x ?? spaceBetweenOhajikis;
 		Destroy(temp);
+		
+		// Store initial ohajiki
+		initialOhajikisComp = new Ohajiki[initialOhajikis.Length];
+		for (int i = 0; i < initialOhajikis.Length; i++)
+		{
+			initialOhajikisComp[i] = initialOhajikis[i].GetComponent<Ohajiki>();
+			initialOhajikisComp[i].groundedBounds = groundedBounds;
+		}
 
 		ohajikiQueue = new Queue<GameObject>(initialOhajikis);
 		ohajikiQueueComp = new Queue<Ohajiki>(initialOhajikisComp);
 		canSpawn = true;
+		
+		GameManager.instance.OnLevelStart += OnLevelStarted;
+		GameManager.instance.OnLevelEnd += OnLevelEnded;
 	}
 
 	private void Update()
 	{
 		if (canSpawn) SpawnOhajiki();
 	}
-
-	// This might need a serious optimization
-	// might use object pool if this is too computationally costly
-	// but as long as it works on our laptop, I'm just going to leave it 
+	
 	private async Task SpawnOhajiki()
 	{
 		canSpawn = false;
-		if (ohajikiPrefab == null || ohajikiAmount <= 0) return;
+		if (ohajikiPrefab == null || ohajikiGroupSize <= 0) return;
 
-		float totalLength = (ohajikiAmount - 1) * spaceBetweenOhajikis;
+		float totalLength = (ohajikiGroupSize - 1) * spaceBetweenOhajikis;
 		float startX = -totalLength / 2f;
 
-		for (int i = 0; i < ohajikiAmount; i++)
+		for (int i = 0; i < ohajikiGroupSize; i++)
 		{
 			Vector3 localOffset = new Vector3(startX + i * spaceBetweenOhajikis, 0.15f, 0f);
-			//Debug.Log(spaceBetweenOhajikis);
 			Vector3 spawnPos = transform.position + transform.TransformDirection(localOffset);
 
 			if (ohajikiQueue.Count < 1 || ohajikiQueue.Peek().layer != 6)
 			{
 				GameObject ohajiki = Instantiate(ohajikiPrefab, spawnPos, transform.rotation);
+				Ohajiki ohajikiComp = ohajiki.GetComponent<Ohajiki>();
+				ohajikiComp.groundedBounds = groundedBounds;
+				
 				ohajikiQueue.Enqueue(ohajiki);
-				ohajikiQueueComp.Enqueue(ohajiki.GetComponent<Ohajiki>());
+				ohajikiQueueComp.Enqueue(ohajikiComp);
 			}
 			else
 			{
@@ -75,7 +89,7 @@ public class OhajikiSpawner : MonoBehaviour
 				Ohajiki ohajikiComp = ohajikiQueueComp.Dequeue();
 				ohajiki.transform.position = spawnPos;
 				ohajiki.transform.rotation = transform.rotation;
-				//ohajiki.GetComponent<Ohajiki>().transform.position = spawnPos;
+				//ohajikiComp.groundedBounds = groundedBounds;
 				ohajikiComp.SetGrounded();
 			}
 		}
@@ -84,6 +98,7 @@ public class OhajikiSpawner : MonoBehaviour
 		canSpawn = true;
 	}
 
+	// Utility functions
 	private void OnDrawGizmos()
 	{
 		Gizmos.color = Color.red;
@@ -92,6 +107,7 @@ public class OhajikiSpawner : MonoBehaviour
 		Gizmos.DrawRay(origin, direction);
 	}
 
+	// Event functions
 	private void OnLevelStarted()
 	{
 		gameObject.SetActive(true);
