@@ -7,26 +7,22 @@ using UnityEngine;
 
 public class PlatformGenerator : MonoBehaviour
 {
+	// Ok so this doesn't work intuitively but I'm the only one using it so it is fine for the moment.
+	
 	[SerializeField] private Vector3 scale;
 	
-	[SerializeField] private int x_size = 30;
-	[SerializeField] private int z_size = 30;
+	[SerializeField] private int lengthX = 30;
+	[SerializeField] private int widthZ = 30;
 
 	[SerializeField] private Vector2Int[] holesXBound;
 	[SerializeField] private Vector2Int[] holesZBound;
 
-	public void Start()
-	{
-		// GeneratePlatform();
-	}
-
 	public void GeneratePlatform()
 	{
-		for (int x = -x_size / 2; x <= x_size / 2; x++)
+		for (int x = -lengthX / 2; x <= lengthX / 2; x++)
 		{
-			for (int z = -z_size / 2; z <= z_size / 2; z++)
+			for (int z = -widthZ / 2; z <= widthZ / 2; z++)
 			{
-				
 				for (int i = 0; i < holesXBound.Length; i++)
 				{
 					if (x > holesXBound[i].x && x < holesXBound[i].y
@@ -37,7 +33,7 @@ public class PlatformGenerator : MonoBehaviour
 				Vector3 position = new Vector3(x, 0, z);
 				GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 				cube.transform.position = position;
-				cube.transform.SetParent(this.transform);
+				cube.transform.SetParent(transform);
 
 				skip_cube:;
 			}

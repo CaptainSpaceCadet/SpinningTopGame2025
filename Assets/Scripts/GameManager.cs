@@ -1,32 +1,39 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    // Instances and events
+    public static GameManager instance;
+    public System.Action OnLevelStart;
     public System.Action OnLevelEnd;
     
-    public static GameManager instance;
-    
+    // Fields shown in the inspector
+    [Header("Gameplay Settings")]
     [SerializeField] private int totalLives = 3;
     [SerializeField] private int totalBalloons = 3;
     
-    private int currentLives = 3;
-    private int currentBalloons = 0;
-
-    [SerializeField] private GameObject lifeContainer;
-    [SerializeField] private Image[] heartSprites; // could get this from above gameObject
+    [Header("Resource UI Elements")]
+    [SerializeField] private GameObject heartContainer;
     [SerializeField] private Sprite heartFull;
     [SerializeField] private Sprite heartEmpty;
     
     [SerializeField] private GameObject balloonContainer;
-    [SerializeField] private Image[] balloonSprites; // could get this from above gameobject
     [SerializeField] private Sprite balloonFull;
     [SerializeField] private Sprite balloonEmpty;
     
-    // Win, Loss
+    [Header("Menu Screens")]
     [SerializeField] private GameObject winScreen;
     [SerializeField] private GameObject lossScreen;
-    [SerializeField] private Image[] lossBalloonSprites;
+    [SerializeField] private Image[] lossScreenBalloonImages;
+    
+    // Private members
+    private int currentLives = 3;
+    private int currentBalloons = 0;
+    
+    private Image[] heartImages;
+    private Image[] balloonImages;
     
     private void Awake()
     {
@@ -38,7 +45,14 @@ public class GameManager : MonoBehaviour
         
         instance = this;
     }
+
+    private void Start()
+    {
+        heartImages = heartContainer.GetComponentsInChildren<Image>();
+        balloonImages = balloonContainer.GetComponentsInChildren<Image>();
+    }
     
+    // Resource functions
     public void DecreaseLives()
     {
         currentLives--;
@@ -50,20 +64,21 @@ public class GameManager : MonoBehaviour
     {
         currentBalloons++;
         if (currentBalloons >= totalBalloons) GameWon();
-        RenderBalloons(currentBalloons, balloonSprites);
+        RenderBalloons(currentBalloons, balloonImages);
     }
     
+    // UI functions
     private void RenderLives(int lives)
     {
         Debug.Log(lives);
         if (lives > totalLives) return;
         for (int i = 0; i < lives; i++)
         {
-            heartSprites[i].sprite = heartFull;
+            heartImages[i].sprite = heartFull;
         }
         for (int i = lives; i < totalLives; i++)
         {
-            heartSprites[i].sprite = heartEmpty;
+            heartImages[i].sprite = heartEmpty;
         }
     }
     
@@ -80,15 +95,35 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Event functions
+    private void GameStarted()
+    {
+        lossScreen.SetActive(false);
+        winScreen.SetActive(false);
+        
+        heartContainer.SetActive(true);
+        balloonContainer.SetActive(true);
+        
+        // resources
+        currentLives = totalLives;
+        RenderLives(currentLives);
+        currentBalloons = 0;
+        RenderBalloons(currentBalloons, balloonImages);
+    } 
+
+    private void GameEnded()
+    {
+        heartContainer.SetActive(false);
+        balloonContainer.SetActive(false);
+    }
+
     public void GameOver()
     {
-        lifeContainer.SetActive(false);
-        balloonContainer.SetActive(false);
-        
+        GameEnded();
         lossScreen.SetActive(true);
         winScreen.SetActive(false);
         
-        RenderBalloons(currentBalloons, lossBalloonSprites);
+        RenderBalloons(currentBalloons, lossScreenBalloonImages);
         
         OnLevelEnd?.Invoke();
         
@@ -97,14 +132,18 @@ public class GameManager : MonoBehaviour
 
     public void GameWon()
     {
-        lifeContainer.SetActive(false);
-        balloonContainer.SetActive(false);
-        
+        GameEnded();
         lossScreen.SetActive(false);
         winScreen.SetActive(true);
         
         OnLevelEnd?.Invoke();
         
         Debug.Log("Game Won");
+    }
+
+    public void ResetLevel()
+    {
+        GameStarted();
+        OnLevelStart?.Invoke();
     }
 }
