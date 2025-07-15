@@ -58,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5d67231d74e5c8945a35341c51f86b92, type: 3}
       propertyPath: m_Name
-      value: "\u3053\u3044\u306E\u307C\u308A"
+      value: koinobori
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -72,6 +72,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5d67231d74e5c8945a35341c51f86b92, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1162671506729917171}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5d67231d74e5c8945a35341c51f86b92, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3110248955309800805}
   m_SourcePrefab: {fileID: 100100000, guid: 5d67231d74e5c8945a35341c51f86b92, type: 3}
 --- !u!1 &5152396403619843214 stripped
 GameObject:
@@ -111,6 +114,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57aa086fbf50afe42ae0a45313a57a05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fallForever: 0
   theta: 30
   initialFallSpeed: 0.5
   acceleration: 0.5
+--- !u!114 &3110248955309800805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5152396403619843214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 841220895
+      Data2: 1129320749
+      Data3: 1856012731
+      Data4: 1347027153
+    Path: event:/Koinobori
+  Event: 
+  EventPlayTrigger: 1
+  EventStopTrigger: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20

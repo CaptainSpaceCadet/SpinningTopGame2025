@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{923e15d8-e7df-4b87-87d8-7e54fc40a4c2}">
+		<property name="assetPath">
+			<value>突風が吹く.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>4.5119999999999996</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{5558b01a-1c14-4afc-acef-c18ff45356bc}</destination>
+		</relationship>
+	</object>
+</objects>

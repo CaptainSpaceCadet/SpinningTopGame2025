@@ -1,6 +1,9 @@
+using FMOD;
+using FMODUnity;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 public class GameManager : MonoBehaviour
 {
@@ -35,8 +38,14 @@ public class GameManager : MonoBehaviour
     private Image[] heartImages;
     private Image[] balloonImages;
     
+    // SoundEmitter
+    [SerializeField] private StudioEventEmitter winEmitter;
+    [SerializeField] private StudioEventEmitter loseEmitter;
+    
     private void Awake()
     {
+        SetEmitters();
+        
         if (instance != null)
         {
             Destroy(gameObject);
@@ -50,6 +59,24 @@ public class GameManager : MonoBehaviour
     {
         heartImages = heartContainer.GetComponentsInChildren<Image>();
         balloonImages = balloonContainer.GetComponentsInChildren<Image>();
+    }
+    
+    /// <summary>
+    /// Set FMOD Studio Emitter for the game manager.
+    /// </summary>
+    public void SetEmitters()
+    {
+        winEmitter = gameObject.AddComponent<StudioEventEmitter>();
+        EventReference winEvent = new EventReference();
+        winEvent.Path = "event:/GameClear";
+        winEvent.Guid = GUID.Parse("{5ddf43d3-d831-49c6-a9f4-8f3724c879a6}");
+        winEmitter.EventReference = winEvent;
+        
+        loseEmitter = gameObject.AddComponent<StudioEventEmitter>();
+        EventReference loseEvent = new EventReference();
+        loseEvent.Path = "event:/GameOver";
+        loseEvent.Guid = GUID.Parse("{9d2a53d8-5e5c-42ff-b7a0-d78c481b8c1d}");
+        loseEmitter.EventReference = loseEvent;
     }
     
     // Resource functions
@@ -97,7 +124,7 @@ public class GameManager : MonoBehaviour
 
     // Event functions
     private void GameStarted()
-    {
+    {   
         lossScreen.SetActive(false);
         winScreen.SetActive(false);
         
@@ -119,6 +146,8 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        loseEmitter.Play();
+        
         GameEnded();
         lossScreen.SetActive(true);
         winScreen.SetActive(false);
@@ -132,6 +161,8 @@ public class GameManager : MonoBehaviour
 
     public void GameWon()
     {
+        winEmitter.Play();
+
         GameEnded();
         lossScreen.SetActive(false);
         winScreen.SetActive(true);
