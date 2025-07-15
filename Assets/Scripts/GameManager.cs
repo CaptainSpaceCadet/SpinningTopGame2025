@@ -1,35 +1,42 @@
 using FMOD;
 using FMODUnity;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 
 public class GameManager : MonoBehaviour
 {
+    // Instances and events
+    public static GameManager instance;
+    public System.Action OnLevelStart;
     public System.Action OnLevelEnd;
     
-    public static GameManager instance;
-    
+    // Fields shown in the inspector
+    [Header("Gameplay Settings")]
     [SerializeField] private int totalLives = 3;
     [SerializeField] private int totalBalloons = 3;
     
-    private int currentLives = 3;
-    private int currentBalloons = 0;
-
-    [SerializeField] private GameObject lifeContainer;
-    [SerializeField] private Image[] heartSprites; // could get this from above gameObject
+    [Header("Resource UI Elements")]
+    [SerializeField] private GameObject heartContainer;
     [SerializeField] private Sprite heartFull;
     [SerializeField] private Sprite heartEmpty;
     
     [SerializeField] private GameObject balloonContainer;
-    [SerializeField] private Image[] balloonSprites; // could get this from above gameobject
     [SerializeField] private Sprite balloonFull;
     [SerializeField] private Sprite balloonEmpty;
     
-    // Win, Loss
+    [Header("Menu Screens")]
     [SerializeField] private GameObject winScreen;
     [SerializeField] private GameObject lossScreen;
-    [SerializeField] private Image[] lossBalloonSprites;
+    [SerializeField] private Image[] lossScreenBalloonImages;
+    
+    // Private members
+    private int currentLives = 3;
+    private int currentBalloons = 0;
+    
+    private Image[] heartImages;
+    private Image[] balloonImages;
     
     // SoundEmitter
     [SerializeField] private StudioEventEmitter winEmitter;
@@ -47,80 +54,13 @@ public class GameManager : MonoBehaviour
         
         instance = this;
     }
-    
-    public void DecreaseLives()
-    {
-        currentLives--;
-        if (currentLives <= 0) GameOver();
-        RenderLives(currentLives);
-    }
 
-    public void IncreaseBalloons()
+    private void Start()
     {
-        currentBalloons++;
-        if (currentBalloons >= totalBalloons) GameWon();
-        RenderBalloons(currentBalloons, balloonSprites);
+        heartImages = heartContainer.GetComponentsInChildren<Image>();
+        balloonImages = balloonContainer.GetComponentsInChildren<Image>();
     }
     
-    private void RenderLives(int lives)
-    {
-        Debug.Log(lives);
-        if (lives > totalLives) return;
-        for (int i = 0; i < lives; i++)
-        {
-            heartSprites[i].sprite = heartFull;
-        }
-        for (int i = lives; i < totalLives; i++)
-        {
-            heartSprites[i].sprite = heartEmpty;
-        }
-    }
-    
-    private void RenderBalloons(int balloons, Image[] balloonSprites)
-    {
-        if (balloons > totalLives) return;
-        for (var i = 0; i < balloons; i++)
-        {
-            balloonSprites[i].sprite = balloonFull;
-        }
-        for (var i = balloons; i < totalLives; i++)
-        {
-            balloonSprites[i].sprite = balloonEmpty;
-        }
-    }
-
-    public void GameOver()
-    {
-        loseEmitter.Play();
-        
-        lifeContainer.SetActive(false);
-        balloonContainer.SetActive(false);
-        
-        lossScreen.SetActive(true);
-        winScreen.SetActive(false);
-        
-        RenderBalloons(currentBalloons, lossBalloonSprites);
-        
-        OnLevelEnd?.Invoke();
-        
-        Debug.Log("Game Over");
-    }
-
-    public void GameWon()
-    {
-        winEmitter.Play();
-        
-        lifeContainer.SetActive(false);
-        balloonContainer.SetActive(false);
-        
-        lossScreen.SetActive(false);
-        winScreen.SetActive(true);
-        
-        OnLevelEnd?.Invoke();
-        
-        Debug.Log("Game Won");
-    }
-
     /// <summary>
     /// Set FMOD Studio Emitter for the game manager.
     /// </summary>
@@ -137,5 +77,104 @@ public class GameManager : MonoBehaviour
         loseEvent.Path = "event:/GameOver";
         loseEvent.Guid = GUID.Parse("{9d2a53d8-5e5c-42ff-b7a0-d78c481b8c1d}");
         loseEmitter.EventReference = loseEvent;
+    }
+    
+    // Resource functions
+    public void DecreaseLives()
+    {
+        currentLives--;
+        if (currentLives <= 0) GameOver();
+        RenderLives(currentLives);
+    }
+
+    public void IncreaseBalloons()
+    {
+        currentBalloons++;
+        if (currentBalloons >= totalBalloons) GameWon();
+        RenderBalloons(currentBalloons, balloonImages);
+    }
+    
+    // UI functions
+    private void RenderLives(int lives)
+    {
+        Debug.Log(lives);
+        if (lives > totalLives) return;
+        for (int i = 0; i < lives; i++)
+        {
+            heartImages[i].sprite = heartFull;
+        }
+        for (int i = lives; i < totalLives; i++)
+        {
+            heartImages[i].sprite = heartEmpty;
+        }
+    }
+    
+    private void RenderBalloons(int balloons, Image[] balloonSprites)
+    {
+        if (balloons > totalLives) return;
+        for (var i = 0; i < balloons; i++)
+        {
+            balloonSprites[i].sprite = balloonFull;
+        }
+        for (var i = balloons; i < totalLives; i++)
+        {
+            balloonSprites[i].sprite = balloonEmpty;
+        }
+    }
+
+    // Event functions
+    private void GameStarted()
+    {   
+        lossScreen.SetActive(false);
+        winScreen.SetActive(false);
+        
+        heartContainer.SetActive(true);
+        balloonContainer.SetActive(true);
+        
+        // resources
+        currentLives = totalLives;
+        RenderLives(currentLives);
+        currentBalloons = 0;
+        RenderBalloons(currentBalloons, balloonImages);
+    } 
+
+    private void GameEnded()
+    {
+        heartContainer.SetActive(false);
+        balloonContainer.SetActive(false);
+    }
+
+    public void GameOver()
+    {
+        loseEmitter.Play();
+        
+        GameEnded();
+        lossScreen.SetActive(true);
+        winScreen.SetActive(false);
+        
+        RenderBalloons(currentBalloons, lossScreenBalloonImages);
+        
+        OnLevelEnd?.Invoke();
+        
+        Debug.Log("Game Over");
+    }
+
+    public void GameWon()
+    {
+        winEmitter.Play();
+
+        GameEnded();
+        lossScreen.SetActive(false);
+        winScreen.SetActive(true);
+        
+        OnLevelEnd?.Invoke();
+        
+        Debug.Log("Game Won");
+    }
+
+    public void ResetLevel()
+    {
+        GameStarted();
+        OnLevelStart?.Invoke();
     }
 }

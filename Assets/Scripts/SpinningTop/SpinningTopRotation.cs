@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class SpinningTopRotation : MonoBehaviour
 {
-	[SerializeField] private float rotationSpeed = 360f; // Degrees per second
+	[Tooltip("Degrees per second")]
+	[SerializeField] private float rotationSpeed = 360f;
 
 	void Update()
 	{

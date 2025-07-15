@@ -1,93 +1,134 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Ohajiki : MonoBehaviour
 {
+    // state
+    private enum OhajikiState
+    {
+        Grounded, Falling, Teleportable
+    }
+    private OhajikiState state = OhajikiState.Grounded;
+    
+    // Fields shown in the inspector
+    [Header("Ohajiki options")]
     [SerializeField] private float speed = 2.0f;
-
-    [SerializeField] private Vector2 xBound;
-    [SerializeField] private Vector2 zBound;
-
     [SerializeField] private float yKillBound = -30;
     
-    public bool cullable = false;
+    // Assigned during creation
+    [Header("Assigned by instantiator")]
+    public Collider groundedBounds;
     
+    // Private members
     private Rigidbody rb;
-    private bool isGrounded = true;
+    
+    // Initial transform
+    private Vector3 initialPosition;
+    private Quaternion initialRotation;
+    private Vector3 initialLocalScale;
     
     void Start()
     {
-        GameManager.instance.OnLevelEnd += OnLevelEnded;
         rb = GetComponent<Rigidbody>();
         rb.isKinematic = true;
         
-        xBound = new Vector2(-21, 274);
-        zBound = new Vector2(-5, 5);
+        RecordInitialState();
+        GameManager.instance.OnLevelStart += OnLevelStarted;
+        GameManager.instance.OnLevelEnd += OnLevelEnded;
     }
-
-    bool IsOutOfBounds()
-    {
-        float x = transform.position.x;
-        float z = transform.position.z;
-        
-        float xMin = Mathf.Min(xBound.x, xBound.y);
-        float xMax = Mathf.Max(xBound.x, xBound.y);
-        float zMin = Mathf.Min(zBound.x, zBound.y);
-        float zMax = Mathf.Max(zBound.x, zBound.y);
-
-        return (x < xMin || x > xMax ||
-                z < zMin || z > zMax);
-    }
-
     
-    // Update is called once per frame
     void Update()
     {
-        //Debug.Log(transform.position.x); // for some reason without this line it doesn't work!!!
-        if (isGrounded && transform.position.x > 23)
+        if (state == OhajikiState.Falling && transform.position.y < yKillBound)
         {
-            Debug.Log("Ohajiki is out of bounds");
-            isGrounded = false;
-            
-            rb.isKinematic = false;
-            rb.useGravity = true;
-        } else if (transform.position.y < yKillBound)
-        {
-            cullable = true;
-            gameObject.layer = 6;
-            rb.isKinematic = true;
-            rb.useGravity = false;
+            SetTeleportable();
         }
     }
     
     void FixedUpdate()
     {
-        if (isGrounded) transform.position += this.transform.forward * (speed * Time.deltaTime);
+        if (state == OhajikiState.Grounded)
+        {
+            transform.position += transform.forward * (speed * Time.deltaTime);
+        }
     }
 
-    void OnLevelEnded()
+    // State functions
+    public void SetGrounded()
     {
-        Destroy(gameObject);
+        state = OhajikiState.Grounded;
+        
+        // layer
+        gameObject.layer = 0;
+        
+        // physics
+        rb.isKinematic = true;
+        rb.useGravity = false;
     }
 
-    // too lazy to get this to work properly
-    
-    // private void OnCollisionEnter(Collision collision)
-    // {
-    //     if (collision.gameObject.layer == 3)
-    //     {
-    //         isGrounded = true;
-    //         rb.linearVelocity = Vector3.zero;
-    //         rb.useGravity = false;
-    //     }
-    // }
-    //
-    // private void OnCollisionExit(Collision collision)
-    // {
-    //     if (collision.gameObject.layer == 3)
-    //     {
-    //         isGrounded = false;
-    //         rb.linearVelocity = Vector3.zero;
-    //         rb.useGravity = true;
-    //     }
-    // }
+    public void SetFalling()
+    {
+        state = OhajikiState.Falling;
+        
+        // layer
+        gameObject.layer = 0;
+        
+        // physics
+        rb.isKinematic = false;
+        rb.useGravity = true;
+    }
+
+    public void SetTeleportable()
+    {
+        state = OhajikiState.Teleportable;
+        
+        // layer
+        gameObject.layer = 6;
+        
+        // physics
+        rb.isKinematic = true;
+        rb.useGravity = false;
+    }
+	
+    // Reset functions
+    private void RecordInitialState()
+    {
+        initialPosition = transform.position;
+        initialRotation = transform.rotation;
+        initialLocalScale = transform.localScale;
+    }
+
+    private void ResetToInitialState()
+    {
+        gameObject.SetActive(true);
+        
+        transform.position = initialPosition;
+        transform.rotation = initialRotation;
+        transform.localScale = initialLocalScale;
+        
+        SetGrounded();
+    }
+
+    // Event functions
+    private void OnLevelStarted()
+    {
+        ResetToInitialState();
+    }
+
+    private void OnLevelEnded()
+    {
+        gameObject.SetActive(false);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        Debug.Log("Ohajiki TriggerExit");
+        Debug.Log(other.gameObject.name);
+        if (other == groundedBounds)
+        {
+            Debug.Log("Ohajiki TriggerExit Grounded");
+            SetFalling();
+        }
+    }
 }

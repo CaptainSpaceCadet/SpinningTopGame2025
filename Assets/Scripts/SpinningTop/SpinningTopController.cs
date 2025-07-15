@@ -48,7 +48,10 @@ public class SpinningTopController : MonoBehaviour
 			rb.constraints = RigidbodyConstraints.FreezeRotation;
 		}
 
-		respawnPoint = this.transform.position;
+		respawnPoint = transform.position;
+		
+		GameManager.instance.OnLevelStart += OnLevelStarted;
+		GameManager.instance.OnLevelEnd += OnLevelEnded;
 	}
 
 	public void OnMove(InputAction.CallbackContext context)
@@ -72,22 +75,26 @@ public class SpinningTopController : MonoBehaviour
 
 	private bool CheckOutofBounds()
 	{
-		return this.transform.position.y < respawnThreshold;
+		return transform.position.y < respawnThreshold;
 	}
 
 	private void Respawn()
 	{
 		destroySoundEmitter.Play();
-		GameManager.instance.DecreaseLives();
-		this.transform.position = respawnPoint;
-		this.transform.rotation = defaultRotation;
+    
+		transform.position = respawnPoint;
+		transform.rotation = defaultRotation;
 		rb.angularVelocity = Vector3.zero;
-		//rb.linearVelocity = Vector3.zero;
+		rb.linearVelocity = Vector3.zero;
 	}
 
 	private void FixedUpdate()
 	{
-		if (CheckOutofBounds()) Respawn();
+		if (CheckOutofBounds())
+		{
+			GameManager.instance.DecreaseLives();
+			Respawn();
+		}
 		// Ground check
 		isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance + 0.01f);
 
@@ -134,5 +141,16 @@ public class SpinningTopController : MonoBehaviour
 		//	targetRotation *= Quaternion.AngleAxis(tiltAngle, right);
 		//	transform.rotation = targetRotation;
 		//}
+	}
+	
+	private void OnLevelStarted()
+	{
+		Respawn();
+		gameObject.SetActive(true);
+	}
+
+	private void OnLevelEnded()
+	{
+		gameObject.SetActive(false);
 	}
 }
