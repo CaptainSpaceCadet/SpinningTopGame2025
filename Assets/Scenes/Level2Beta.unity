@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 32245112}
   - component: {fileID: 32245113}
   m_Layer: 5
-  m_Name: LifeContainer
+  m_Name: HeartContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -577,12 +577,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe207e50ba200e45a74ed8567d589ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  original: 1
   speed: 3
-  xBound: {x: -21, y: 274}
-  zBound: {x: -5, y: 5}
   yKillBound: -50
-  isTeleportable: 0
+  groundedBounds: {fileID: 311611758}
 --- !u!65 &40212017
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1124,12 +1121,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe207e50ba200e45a74ed8567d589ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  original: 1
   speed: 3
-  xBound: {x: -21, y: 274}
-  zBound: {x: -5, y: 5}
   yKillBound: -50
-  isTeleportable: 0
+  groundedBounds: {fileID: 311611758}
 --- !u!65 &65937522
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2144,12 +2138,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe207e50ba200e45a74ed8567d589ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  original: 1
   speed: 3
-  xBound: {x: -21, y: 274}
-  zBound: {x: -5, y: 5}
   yKillBound: -50
-  isTeleportable: 0
+  groundedBounds: {fileID: 311611758}
 --- !u!65 &119088136
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3465,12 +3456,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe207e50ba200e45a74ed8567d589ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  original: 1
   speed: 3
-  xBound: {x: -21, y: 274}
-  zBound: {x: -5, y: 5}
   yKillBound: -50
-  isTeleportable: 0
+  groundedBounds: {fileID: 311611758}
 --- !u!65 &174428859
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5849,12 +5837,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe207e50ba200e45a74ed8567d589ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  original: 1
   speed: 3
-  xBound: {x: -21, y: 274}
-  zBound: {x: -5, y: 5}
   yKillBound: -50
-  isTeleportable: 0
+  groundedBounds: {fileID: 311611758}
 --- !u!65 &271168065
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6116,12 +6101,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe207e50ba200e45a74ed8567d589ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  original: 1
   speed: 3
-  xBound: {x: -21, y: 274}
-  zBound: {x: -5, y: 5}
   yKillBound: -50
-  isTeleportable: 0
+  groundedBounds: {fileID: 311611758}
 --- !u!65 &291543367
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6268,6 +6250,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 293093867}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &311611758 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 1687004939687425608, guid: 2530acc2ff359854bb2742809277b5d4, type: 3}
+  m_PrefabInstance: {fileID: 1528180713}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &314057795
 GameObject:
   m_ObjectHideFlags: 0
@@ -14161,12 +14148,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe207e50ba200e45a74ed8567d589ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  original: 1
   speed: 3
-  xBound: {x: -21, y: 274}
-  zBound: {x: -5, y: 5}
   yKillBound: -50
-  isTeleportable: 0
+  groundedBounds: {fileID: 311611758}
 --- !u!65 &680295736
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16978,12 +16962,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe207e50ba200e45a74ed8567d589ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  original: 1
   speed: 3
-  xBound: {x: -21, y: 274}
-  zBound: {x: -5, y: 5}
   yKillBound: -50
-  isTeleportable: 0
+  groundedBounds: {fileID: 311611758}
 --- !u!65 &850375026
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17060,11 +17041,11 @@ Transform:
   m_GameObject: {fileID: 858318399}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -643.5, y: -395, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1411593077}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &861481237
 GameObject:
@@ -21355,12 +21336,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe207e50ba200e45a74ed8567d589ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  original: 1
   speed: 3
-  xBound: {x: -21, y: 274}
-  zBound: {x: -5, y: 5}
   yKillBound: -50
-  isTeleportable: 0
+  groundedBounds: {fileID: 311611758}
 --- !u!65 &1116665952
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25135,12 +25113,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe207e50ba200e45a74ed8567d589ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  original: 1
   speed: 3
-  xBound: {x: -21, y: 274}
-  zBound: {x: -5, y: 5}
   yKillBound: -50
-  isTeleportable: 0
+  groundedBounds: {fileID: 311611758}
 --- !u!65 &1329149574
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26348,6 +26323,7 @@ RectTransform:
   - {fileID: 1451791458}
   - {fileID: 518510757}
   - {fileID: 1621656371}
+  - {fileID: 858318401}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -26521,12 +26497,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe207e50ba200e45a74ed8567d589ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  original: 1
   speed: 3
-  xBound: {x: -21, y: 274}
-  zBound: {x: -5, y: 5}
   yKillBound: -50
-  isTeleportable: 0
+  groundedBounds: {fileID: 311611758}
 --- !u!65 &1415638226
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26849,12 +26822,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe207e50ba200e45a74ed8567d589ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  original: 1
   speed: 3
-  xBound: {x: -21, y: 274}
-  zBound: {x: -5, y: 5}
   yKillBound: -50
-  isTeleportable: 0
+  groundedBounds: {fileID: 311611758}
 --- !u!65 &1445687391
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27785,12 +27755,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe207e50ba200e45a74ed8567d589ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  original: 1
   speed: 3
-  xBound: {x: -21, y: 274}
-  zBound: {x: -5, y: 5}
   yKillBound: -50
-  isTeleportable: 0
+  groundedBounds: {fileID: 311611758}
 --- !u!65 &1484472796
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28103,12 +28070,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe207e50ba200e45a74ed8567d589ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  original: 1
   speed: 3
-  xBound: {x: -21, y: 274}
-  zBound: {x: -5, y: 5}
   yKillBound: -50
-  isTeleportable: 0
+  groundedBounds: {fileID: 311611758}
 --- !u!65 &1496074874
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28177,23 +28141,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalLives: 3
   totalBalloons: 3
-  lifeContainer: {fileID: 32245111}
-  heartSprites:
-  - {fileID: 684872830}
-  - {fileID: 1954805191}
-  - {fileID: 127548375}
+  heartContainer: {fileID: 32245111}
   heartFull: {fileID: 4606908045521496030, guid: 2b8558b645a07d74582677fd0bf9dfa9, type: 3}
   heartEmpty: {fileID: -3094302376565900353, guid: c52c66e8c335c1640a21e3d2c274bfd7, type: 3}
   balloonContainer: {fileID: 1451791457}
-  balloonSprites:
-  - {fileID: 870181405}
-  - {fileID: 319560905}
-  - {fileID: 1320414741}
   balloonFull: {fileID: 5199979006384268662, guid: 174cd13a4c04d4944a6e414d9e3987f4, type: 3}
   balloonEmpty: {fileID: -707816793393910010, guid: 4851d0a9a81927a478fa6af654948fd8, type: 3}
   winScreen: {fileID: 518510756}
   lossScreen: {fileID: 1621656370}
-  lossBalloonSprites:
+  lossScreenBalloonImages:
   - {fileID: 1020922023}
   - {fileID: 958034624}
   - {fileID: 7849585}
@@ -28909,13 +28865,85 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6016257206328101163, guid: 2530acc2ff359854bb2742809277b5d4, type: 3}
-      propertyPath: ohajikiAmount
-      value: 2
-      objectReference: {fileID: 0}
+      propertyPath: 'initialOhajikis.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1484472793}
     - target: {fileID: 6016257206328101163, guid: 2530acc2ff359854bb2742809277b5d4, type: 3}
-      propertyPath: spawnRateInSeconds
-      value: 1.5
-      objectReference: {fileID: 0}
+      propertyPath: 'initialOhajikis.Array.data[1]'
+      value: 
+      objectReference: {fileID: 174428856}
+    - target: {fileID: 6016257206328101163, guid: 2530acc2ff359854bb2742809277b5d4, type: 3}
+      propertyPath: 'initialOhajikis.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1329149571}
+    - target: {fileID: 6016257206328101163, guid: 2530acc2ff359854bb2742809277b5d4, type: 3}
+      propertyPath: 'initialOhajikis.Array.data[3]'
+      value: 
+      objectReference: {fileID: 40212014}
+    - target: {fileID: 6016257206328101163, guid: 2530acc2ff359854bb2742809277b5d4, type: 3}
+      propertyPath: 'initialOhajikis.Array.data[4]'
+      value: 
+      objectReference: {fileID: 1756148303}
+    - target: {fileID: 6016257206328101163, guid: 2530acc2ff359854bb2742809277b5d4, type: 3}
+      propertyPath: 'initialOhajikis.Array.data[5]'
+      value: 
+      objectReference: {fileID: 1415638223}
+    - target: {fileID: 6016257206328101163, guid: 2530acc2ff359854bb2742809277b5d4, type: 3}
+      propertyPath: 'initialOhajikis.Array.data[6]'
+      value: 
+      objectReference: {fileID: 2024382891}
+    - target: {fileID: 6016257206328101163, guid: 2530acc2ff359854bb2742809277b5d4, type: 3}
+      propertyPath: 'initialOhajikis.Array.data[7]'
+      value: 
+      objectReference: {fileID: 2124419338}
+    - target: {fileID: 6016257206328101163, guid: 2530acc2ff359854bb2742809277b5d4, type: 3}
+      propertyPath: 'initialOhajikis.Array.data[8]'
+      value: 
+      objectReference: {fileID: 119088133}
+    - target: {fileID: 6016257206328101163, guid: 2530acc2ff359854bb2742809277b5d4, type: 3}
+      propertyPath: 'initialOhajikis.Array.data[9]'
+      value: 
+      objectReference: {fileID: 1445687388}
+    - target: {fileID: 6016257206328101163, guid: 2530acc2ff359854bb2742809277b5d4, type: 3}
+      propertyPath: 'initialOhajikis.Array.data[10]'
+      value: 
+      objectReference: {fileID: 271168062}
+    - target: {fileID: 6016257206328101163, guid: 2530acc2ff359854bb2742809277b5d4, type: 3}
+      propertyPath: 'initialOhajikis.Array.data[11]'
+      value: 
+      objectReference: {fileID: 291543364}
+    - target: {fileID: 6016257206328101163, guid: 2530acc2ff359854bb2742809277b5d4, type: 3}
+      propertyPath: 'initialOhajikis.Array.data[12]'
+      value: 
+      objectReference: {fileID: 1574452836}
+    - target: {fileID: 6016257206328101163, guid: 2530acc2ff359854bb2742809277b5d4, type: 3}
+      propertyPath: 'initialOhajikis.Array.data[13]'
+      value: 
+      objectReference: {fileID: 2043508845}
+    - target: {fileID: 6016257206328101163, guid: 2530acc2ff359854bb2742809277b5d4, type: 3}
+      propertyPath: 'initialOhajikis.Array.data[14]'
+      value: 
+      objectReference: {fileID: 850375023}
+    - target: {fileID: 6016257206328101163, guid: 2530acc2ff359854bb2742809277b5d4, type: 3}
+      propertyPath: 'initialOhajikis.Array.data[15]'
+      value: 
+      objectReference: {fileID: 1116665949}
+    - target: {fileID: 6016257206328101163, guid: 2530acc2ff359854bb2742809277b5d4, type: 3}
+      propertyPath: 'initialOhajikis.Array.data[16]'
+      value: 
+      objectReference: {fileID: 680295733}
+    - target: {fileID: 6016257206328101163, guid: 2530acc2ff359854bb2742809277b5d4, type: 3}
+      propertyPath: 'initialOhajikis.Array.data[17]'
+      value: 
+      objectReference: {fileID: 1960157577}
+    - target: {fileID: 6016257206328101163, guid: 2530acc2ff359854bb2742809277b5d4, type: 3}
+      propertyPath: 'initialOhajikis.Array.data[18]'
+      value: 
+      objectReference: {fileID: 65937519}
+    - target: {fileID: 6016257206328101163, guid: 2530acc2ff359854bb2742809277b5d4, type: 3}
+      propertyPath: 'initialOhajikis.Array.data[19]'
+      value: 
+      objectReference: {fileID: 1496074871}
     - target: {fileID: 8670186809301748085, guid: 2530acc2ff359854bb2742809277b5d4, type: 3}
       propertyPath: m_Name
       value: OhajikiSpawner
@@ -30089,12 +30117,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe207e50ba200e45a74ed8567d589ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  original: 1
   speed: 3
-  xBound: {x: -21, y: 274}
-  zBound: {x: -5, y: 5}
   yKillBound: -50
-  isTeleportable: 0
+  groundedBounds: {fileID: 311611758}
 --- !u!65 &1574452839
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -32875,12 +32900,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe207e50ba200e45a74ed8567d589ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  original: 1
   speed: 3
-  xBound: {x: -21, y: 274}
-  zBound: {x: -5, y: 5}
   yKillBound: -50
-  isTeleportable: 0
+  groundedBounds: {fileID: 311611758}
 --- !u!65 &1756148306
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -38147,12 +38169,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe207e50ba200e45a74ed8567d589ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  original: 1
   speed: 3
-  xBound: {x: -21, y: 274}
-  zBound: {x: -5, y: 5}
   yKillBound: -50
-  isTeleportable: 0
+  groundedBounds: {fileID: 311611758}
 --- !u!65 &1960157580
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -39463,12 +39482,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe207e50ba200e45a74ed8567d589ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  original: 1
   speed: 3
-  xBound: {x: -21, y: 274}
-  zBound: {x: -5, y: 5}
   yKillBound: -50
-  isTeleportable: 0
+  groundedBounds: {fileID: 311611758}
 --- !u!65 &2024382894
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -39781,12 +39797,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe207e50ba200e45a74ed8567d589ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  original: 1
   speed: 3
-  xBound: {x: -21, y: 274}
-  zBound: {x: -5, y: 5}
   yKillBound: -50
-  isTeleportable: 0
+  groundedBounds: {fileID: 311611758}
 --- !u!65 &2043508848
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -41141,12 +41154,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe207e50ba200e45a74ed8567d589ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  original: 1
   speed: 3
-  xBound: {x: -21, y: 274}
-  zBound: {x: -5, y: 5}
   yKillBound: -50
-  isTeleportable: 0
+  groundedBounds: {fileID: 311611758}
 --- !u!65 &2124419341
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -42139,9 +42149,11 @@ MeshFilter:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1503594906}
   - {fileID: 963075646}
   - {fileID: 824383239}
+  - {fileID: 1503594906}
+  - {fileID: 201600296}
+  - {fileID: 1411593077}
   - {fileID: 1771059535}
   - {fileID: 1528180713}
   - {fileID: 1774074613}
@@ -42150,9 +42162,6 @@ SceneRoots:
   - {fileID: 1145690851}
   - {fileID: 1863638652}
   - {fileID: 269912571}
-  - {fileID: 201600296}
-  - {fileID: 1411593077}
-  - {fileID: 858318401}
   - {fileID: 1484472797}
   - {fileID: 174428860}
   - {fileID: 1329149575}

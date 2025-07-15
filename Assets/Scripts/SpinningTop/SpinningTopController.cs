@@ -41,7 +41,7 @@ public class SpinningTopController : MonoBehaviour
 			rb.constraints = RigidbodyConstraints.FreezeRotation;
 		}
 
-		respawnPoint = this.transform.position;
+		respawnPoint = transform.position;
 		
 		GameManager.instance.OnLevelStart += OnLevelStarted;
 		GameManager.instance.OnLevelEnd += OnLevelEnded;
@@ -62,13 +62,13 @@ public class SpinningTopController : MonoBehaviour
 
 	private bool CheckOutofBounds()
 	{
-		return this.transform.position.y < respawnThreshold;
+		return transform.position.y < respawnThreshold;
 	}
 
 	private void Respawn()
 	{
-		this.transform.position = respawnPoint;
-		this.transform.rotation = defaultRotation;
+		transform.position = respawnPoint;
+		transform.rotation = defaultRotation;
 		rb.angularVelocity = Vector3.zero;
 		rb.linearVelocity = Vector3.zero;
 	}
