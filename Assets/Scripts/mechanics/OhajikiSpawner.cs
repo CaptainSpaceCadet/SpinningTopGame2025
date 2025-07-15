@@ -12,6 +12,7 @@ public class OhajikiSpawner : MonoBehaviour
 	[SerializeField] private float spawnRateInSeconds = 2f;
 	[Tooltip("This property is automatically set if a collider is available")]
 	[SerializeField] private float spaceBetweenOhajikis = 2.0f;
+	[SerializeField] private float spaceBetweenOhajikisBuffer = 0.1f;
 	
 	[Header("Ohajiki options")]
 	[SerializeField] private Collider groundedBounds;
@@ -36,7 +37,7 @@ public class OhajikiSpawner : MonoBehaviour
 		var temp = Instantiate(ohajikiPrefab);
 		var collider = temp.GetComponent<Collider>();
 		
-		spaceBetweenOhajikis = collider?.bounds.size.x ?? spaceBetweenOhajikis;
+		spaceBetweenOhajikis = collider?.bounds.size.x + spaceBetweenOhajikisBuffer ?? spaceBetweenOhajikis;
 		Destroy(temp);
 		
 		// Store initial ohajiki
@@ -63,7 +64,7 @@ public class OhajikiSpawner : MonoBehaviour
 	private async Task SpawnOhajiki()
 	{
 		canSpawn = false;
-		if (ohajikiPrefab == null || ohajikiGroupSize <= 0) return;
+		if (ohajikiPrefab ==null || ohajikiGroupSize <= 0) return;
 
 		float totalLength = (ohajikiGroupSize - 1) * spaceBetweenOhajikis;
 		float startX = -totalLength / 2f;
