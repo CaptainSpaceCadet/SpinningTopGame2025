@@ -8,8 +8,6 @@ public class GameManager : MonoBehaviour
     public System.Action OnLevelStart;
     public System.Action OnLevelEnd;
     
-    //private List<IResettable> resettables = new List<IResettable>();
-    
     [SerializeField] private int totalLives = 3;
     [SerializeField] private int totalBalloons = 3;
     
@@ -87,6 +85,9 @@ public class GameManager : MonoBehaviour
     {
         lossScreen.SetActive(false);
         winScreen.SetActive(false);
+        
+        lifeContainer.SetActive(true);
+        balloonContainer.SetActive(true);
         
         // resources
         currentLives = totalLives;
