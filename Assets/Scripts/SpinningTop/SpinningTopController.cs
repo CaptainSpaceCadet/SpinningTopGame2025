@@ -50,8 +50,8 @@ public class SpinningTopController : MonoBehaviour
 
 		respawnPoint = transform.position;
 		
-		GameManager.instance.OnLevelStart += OnLevelStarted;
-		GameManager.instance.OnLevelEnd += OnLevelEnded;
+		//GameManager.instance.OnLevelStart += OnLevelStarted;
+		//GameManager.instance.OnLevelEnd += OnLevelEnded;
 	}
 
 	public void OnMove(InputAction.CallbackContext context)
@@ -92,8 +92,8 @@ public class SpinningTopController : MonoBehaviour
 	{
 		if (CheckOutofBounds())
 		{
-			GameManager.instance.DecreaseLives();
-			Respawn();
+			//GameManager.instance.DecreaseLives();
+			//Respawn();
 		}
 		// Ground check
 		isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance + 0.01f);
