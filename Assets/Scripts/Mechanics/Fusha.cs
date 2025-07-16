@@ -40,7 +40,7 @@ public class Fusha : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Fusha TriggerEnter");
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("player"))
         {
             Debug.Log("Fusha TriggerEnter Player");
             player = other.gameObject;

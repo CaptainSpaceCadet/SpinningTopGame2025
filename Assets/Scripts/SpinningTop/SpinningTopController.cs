@@ -50,22 +50,19 @@ public class SpinningTopController : MonoBehaviour
 
 		respawnPoint = transform.position;
 		
-		//GameManager.instance.OnLevelStart += OnLevelStarted;
-		//GameManager.instance.OnLevelEnd += OnLevelEnded;
+		GameManager.instance.OnLevelStart += OnLevelStarted;
+		GameManager.instance.OnLevelEnd += OnLevelEnded;
 	}
 
 	public void OnMove(InputAction.CallbackContext context)
 	{
-		if(!moveSoundEmitter.IsPlaying())
-			moveSoundEmitter.Play();
-		
+		if(!moveSoundEmitter.IsPlaying()) moveSoundEmitter.Play();
 		m_moveInput = context.ReadValue<Vector2>();
 	}
 
 	public void OnJump(InputAction.CallbackContext context)
 	{
-		if(!jumpSoundEmitter.IsPlaying())
-			jumpSoundEmitter.Play();
+		if(!jumpSoundEmitter.IsPlaying()) jumpSoundEmitter.Play();
 		
 		if (context.started && isGrounded)
 		{
@@ -73,7 +70,7 @@ public class SpinningTopController : MonoBehaviour
 		}
 	}
 
-	private bool CheckOutofBounds()
+	private bool CheckOutOfBounds()
 	{
 		return transform.position.y < respawnThreshold;
 	}
@@ -90,10 +87,10 @@ public class SpinningTopController : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		if (CheckOutofBounds())
+		if (CheckOutOfBounds())
 		{
-			//GameManager.instance.DecreaseLives();
-			//Respawn();
+			GameManager.instance.DecreaseLives();
+			Respawn();
 		}
 		// Ground check
 		isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance + 0.01f);
