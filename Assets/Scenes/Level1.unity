@@ -602,6 +602,23 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 566923857c36842d88abafe41a35e955, type: 3}
+--- !u!1 &908806132 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4229147876120700004, guid: 8e7c1b0c060c446a28b16a0e7c74bf8b, type: 3}
+  m_PrefabInstance: {fileID: 1192610309}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &908806135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908806132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de734c4fd4c7f465e88d60b4efefe5d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &934805746
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -804,6 +821,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1164573936432936239, guid: 9e7dfe487b00d450f867b59aff68c9a4, type: 3}
+      propertyPath: nextScene
+      value: Level2Beta
+      objectReference: {fileID: 0}
     - target: {fileID: 1164573936432936239, guid: 9e7dfe487b00d450f867b59aff68c9a4, type: 3}
       propertyPath: winScreen
       value: 
@@ -1126,6 +1147,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8471848824653905312, guid: 8e7c1b0c060c446a28b16a0e7c74bf8b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 908806135}
+    - target: {fileID: 8471848824653905312, guid: 8e7c1b0c060c446a28b16a0e7c74bf8b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnButtonClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471848824653905312, guid: 8e7c1b0c060c446a28b16a0e7c74bf8b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ProgressButtonListener, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 8612753983404232728, guid: 8e7c1b0c060c446a28b16a0e7c74bf8b, type: 3}
       propertyPath: m_Name
       value: UI
@@ -1149,7 +1182,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4229147876120700004, guid: 8e7c1b0c060c446a28b16a0e7c74bf8b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 908806135}
   m_SourcePrefab: {fileID: 100100000, guid: 8e7c1b0c060c446a28b16a0e7c74bf8b, type: 3}
 --- !u!114 &1192610310 stripped
 MonoBehaviour:

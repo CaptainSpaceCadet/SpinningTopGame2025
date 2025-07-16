@@ -2,6 +2,7 @@ using FMOD;
 using FMODUnity;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 
@@ -30,6 +31,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject winScreen;
     [SerializeField] private GameObject lossScreen;
     [SerializeField] private Image[] lossScreenBalloonImages;
+        
+    [Header("Win/Loss Sound Emitters")]
+    [SerializeField] private StudioEventEmitter winEmitter;
+    [SerializeField] private StudioEventEmitter loseEmitter;
+    
+    [Header("Next Level")]
+    [SerializeField] private string nextScene;
     
     // Private members
     private int currentLives = 3;
@@ -37,10 +45,6 @@ public class GameManager : MonoBehaviour
     
     private Image[] heartImages;
     private Image[] balloonImages;
-    
-    // SoundEmitter
-    [SerializeField] private StudioEventEmitter winEmitter;
-    [SerializeField] private StudioEventEmitter loseEmitter;
     
     private void Awake()
     {
@@ -176,5 +180,10 @@ public class GameManager : MonoBehaviour
     {
         GameStarted();
         OnLevelStart?.Invoke();
+    }
+
+    public void ProgressLevel()
+    {
+        SceneManager.LoadScene(nextScene);
     }
 }
