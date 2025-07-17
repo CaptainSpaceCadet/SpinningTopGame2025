@@ -16,6 +16,8 @@ public class OhajikiSpawner : MonoBehaviour
 	
 	[Header("Ohajiki options")]
 	[SerializeField] private Collider groundedBounds;
+	[SerializeField] private float speed = 7.15f;
+	[SerializeField] private float yKillBound = -15;
 
 	[Header("Prefab")]
 	[SerializeField] private GameObject ohajikiPrefab;
@@ -82,6 +84,8 @@ public class OhajikiSpawner : MonoBehaviour
 				Ohajiki ohajikiComp = ohajiki.GetComponent<Ohajiki>();
 				ohajikiComp.original = false;
 				ohajikiComp.groundedBounds = groundedBounds;
+				ohajikiComp.speed = speed;
+				ohajikiComp.yKillBound = yKillBound;
 				
 				ohajikiQueue.Enqueue(ohajiki);
 				ohajikiQueueComp.Enqueue(ohajikiComp);

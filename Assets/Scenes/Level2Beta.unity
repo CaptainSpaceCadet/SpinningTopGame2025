@@ -23859,12 +23859,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6016257206328101163, guid: 2530acc2ff359854bb2742809277b5d4, type: 3}
+      propertyPath: speed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016257206328101163, guid: 2530acc2ff359854bb2742809277b5d4, type: 3}
+      propertyPath: yKillBound
+      value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016257206328101163, guid: 2530acc2ff359854bb2742809277b5d4, type: 3}
       propertyPath: ohajikiPrefab
       value: 
       objectReference: {fileID: 2106765827089968230, guid: 688077b22cd3c7c4bb82c10f3e989f43, type: 3}
     - target: {fileID: 6016257206328101163, guid: 2530acc2ff359854bb2742809277b5d4, type: 3}
       propertyPath: spawnRateInSeconds
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6016257206328101163, guid: 2530acc2ff359854bb2742809277b5d4, type: 3}
       propertyPath: spaceBetweenOhajikis
@@ -27808,6 +27816,10 @@ PrefabInstance:
     - target: {fileID: 967069245148598158, guid: 566923857c36842d88abafe41a35e955, type: 3}
       propertyPath: m_Name
       value: Koma
+      objectReference: {fileID: 0}
+    - target: {fileID: 967069245148598158, guid: 566923857c36842d88abafe41a35e955, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4448459139508748390, guid: 566923857c36842d88abafe41a35e955, type: 3}
       propertyPath: gameManager

@@ -13,8 +13,8 @@ public class Ohajiki : MonoBehaviour
     
     // Fields shown in the inspector
     [Header("Ohajiki options")]
-    [SerializeField] private float speed = 2.0f;
-    [SerializeField] private float yKillBound = -30;
+    [SerializeField] public float speed = 2.0f;
+    [SerializeField] public float yKillBound = -30;
 
     [SerializeField] private Collider movingCollider;
     [SerializeField] private Collider physicsCollider;
