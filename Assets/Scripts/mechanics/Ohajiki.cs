@@ -123,8 +123,8 @@ public class Ohajiki : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Ohajiki TriggerExit");
-        Debug.Log(other.gameObject.name);
+        //Debug.Log("Ohajiki TriggerExit");
+        //Debug.Log(other.gameObject.name);
         if (other == groundedBounds)
         {
             Debug.Log("Ohajiki TriggerExit Grounded");
