@@ -87,6 +87,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3224361480447027746}
+  - {fileID: 719648385298748443}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 42.95, z: 0}
 --- !u!33 &2661462461199380744
@@ -178,6 +179,7 @@ MonoBehaviour:
   ohajikiGroupSize: 2
   spawnRateInSeconds: 1.5
   spaceBetweenOhajikis: 2
+  spaceBetweenOhajikisBuffer: 0.1
   groundedBounds: {fileID: 1687004939687425608}
   ohajikiPrefab: {fileID: 4849851178679428168, guid: 685697f397f612a42ae62f685be8a799, type: 3}
   initialOhajikis:
@@ -201,6 +203,79 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+--- !u!1001 &2273148566417121991
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5585317460272725716}
+    m_Modifications:
+    - target: {fileID: 1618882399545947868, guid: 688077b22cd3c7c4bb82c10f3e989f43, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618882399545947868, guid: 688077b22cd3c7c4bb82c10f3e989f43, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618882399545947868, guid: 688077b22cd3c7c4bb82c10f3e989f43, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618882399545947868, guid: 688077b22cd3c7c4bb82c10f3e989f43, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618882399545947868, guid: 688077b22cd3c7c4bb82c10f3e989f43, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618882399545947868, guid: 688077b22cd3c7c4bb82c10f3e989f43, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618882399545947868, guid: 688077b22cd3c7c4bb82c10f3e989f43, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618882399545947868, guid: 688077b22cd3c7c4bb82c10f3e989f43, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618882399545947868, guid: 688077b22cd3c7c4bb82c10f3e989f43, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618882399545947868, guid: 688077b22cd3c7c4bb82c10f3e989f43, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106765827089968230, guid: 688077b22cd3c7c4bb82c10f3e989f43, type: 3}
+      propertyPath: m_Name
+      value: ohajiki_v2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2313505578363646836, guid: 688077b22cd3c7c4bb82c10f3e989f43, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: f23606dd646174c448bb747b40dcc9e1, type: 2}
+    - target: {fileID: 5925164256552433470, guid: 688077b22cd3c7c4bb82c10f3e989f43, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7403157046075624459, guid: 688077b22cd3c7c4bb82c10f3e989f43, type: 3}
+    - {fileID: 5414509159553463620, guid: 688077b22cd3c7c4bb82c10f3e989f43, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 6446659890378387235, guid: 688077b22cd3c7c4bb82c10f3e989f43, type: 3}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 688077b22cd3c7c4bb82c10f3e989f43, type: 3}
+--- !u!4 &719648385298748443 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1618882399545947868, guid: 688077b22cd3c7c4bb82c10f3e989f43, type: 3}
+  m_PrefabInstance: {fileID: 2273148566417121991}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6113087968943965678
 PrefabInstance:
   m_ObjectHideFlags: 0
