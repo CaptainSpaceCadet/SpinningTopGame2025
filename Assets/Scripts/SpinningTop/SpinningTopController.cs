@@ -7,6 +7,12 @@ public class SpinningTopController : MonoBehaviour
 	private Vector2 m_moveInput = Vector2.zero;
 	private Vector2 m_currentDirection = Vector2.zero;
 	private float speed = 0f;
+
+	[Header("Axis")] 
+	[SerializeField] private bool reverseVertical = false;
+	[SerializeField] private bool reverseHorizontal = false;
+	[SerializeField] private bool switchVerticalHorizontal = false;
+	[Header("Max speed")]
 	[SerializeField] private float maxSpeed = 5f;
 	[Header("Seconds to reach maxSpeed")]
 	[SerializeField] private float timeToMaxSpeed = 0.5f;
@@ -58,6 +64,9 @@ public class SpinningTopController : MonoBehaviour
 	{
 		if(!moveSoundEmitter.IsPlaying()) moveSoundEmitter.Play();
 		m_moveInput = context.ReadValue<Vector2>();
+		if (reverseVertical) m_moveInput.y *= -1;
+		if (reverseHorizontal) m_moveInput.x *= -1;
+		if (switchVerticalHorizontal) (m_moveInput.x, m_moveInput.y) = (m_moveInput.y, m_moveInput.x);
 	}
 
 	public void OnJump(InputAction.CallbackContext context)
