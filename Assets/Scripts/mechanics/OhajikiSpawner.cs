@@ -37,7 +37,7 @@ public class OhajikiSpawner : MonoBehaviour
 		var temp = Instantiate(ohajikiPrefab);
 		var collider = temp.GetComponent<Collider>();
 		
-		spaceBetweenOhajikis = collider?.bounds.size.x + spaceBetweenOhajikisBuffer ?? spaceBetweenOhajikis;
+		// spaceBetweenOhajikis = collider?.bounds.size.x + spaceBetweenOhajikisBuffer ?? spaceBetweenOhajikis;
 		Destroy(temp);
 		
 		// Store initial ohajiki
