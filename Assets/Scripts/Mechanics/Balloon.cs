@@ -1,12 +1,16 @@
+using MoreMountains.Feedbacks;
 using System;
 using UnityEngine;
 
 public class Balloon : MonoBehaviour
 {
+	public MMF_Player popingFeedback;
 	// Initial transform
 	private Vector3 initialPosition;
 	private Quaternion initialRotation;
 	private Vector3 initialLocalScale;
+
+	private bool poped = false;
 
 	private void Start()
 	{
@@ -36,12 +40,18 @@ public class Balloon : MonoBehaviour
 		ResetToInitialState();
 	}
 
-	private void OnCollisionEnter(Collision collision)
+	private async void OnCollisionEnter(Collision collision)
 	{
 		if (collision.gameObject.CompareTag("player"))
 		{
-			GameManager.instance.IncreaseBalloons();
-			gameObject.SetActive(false);
+			if (!poped)
+			{
+				poped = true;
+				await popingFeedback?.PlayFeedbacksTask();
+				GameManager.instance.IncreaseBalloons();
+
+				gameObject.SetActive(false);
+			}
 		}
 	}
 }
