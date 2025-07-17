@@ -13,11 +13,15 @@ public class Ohajiki : MonoBehaviour
     
     // Fields shown in the inspector
     [Header("Ohajiki options")]
-    [SerializeField] private float speed = 2.0f;
-    [SerializeField] private float yKillBound = -30;
+    [SerializeField] public float speed = 2.0f;
+    [SerializeField] public float yKillBound = -30;
+
+    [SerializeField] private Collider movingCollider;
+    [SerializeField] private Collider physicsCollider;
     
     // Assigned during creation
     [Header("Assigned by instantiator")]
+    public bool original = false;
     public Collider groundedBounds;
     
     // Private members
@@ -63,6 +67,7 @@ public class Ohajiki : MonoBehaviour
         gameObject.layer = 0;
         
         // physics
+        movingCollider.enabled = true;
         rb.isKinematic = true;
         rb.useGravity = false;
     }
@@ -75,6 +80,7 @@ public class Ohajiki : MonoBehaviour
         gameObject.layer = 0;
         
         // physics
+        movingCollider.enabled = false;
         rb.isKinematic = false;
         rb.useGravity = true;
     }
@@ -87,6 +93,7 @@ public class Ohajiki : MonoBehaviour
         gameObject.layer = 6;
         
         // physics
+        movingCollider.enabled = false;
         rb.isKinematic = true;
         rb.useGravity = false;
     }
@@ -113,21 +120,27 @@ public class Ohajiki : MonoBehaviour
     // Event functions
     private void OnLevelStarted()
     {
-        ResetToInitialState();
+        if (original) ResetToInitialState();
+        else
+        {
+            gameObject.SetActive(true);
+            transform.position = new Vector3(0, yKillBound, 0);
+        }
     }
 
     private void OnLevelEnded()
     {
+        SetTeleportable();
         gameObject.SetActive(false);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Ohajiki TriggerExit");
-        Debug.Log(other.gameObject.name);
+        //Debug.Log("Ohajiki TriggerExit");
+        //Debug.Log(other.gameObject.name);
         if (other == groundedBounds)
         {
-            Debug.Log("Ohajiki TriggerExit Grounded");
+            //Debug.Log("Ohajiki TriggerExit Grounded");
             SetFalling();
         }
     }
