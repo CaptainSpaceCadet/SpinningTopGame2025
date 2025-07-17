@@ -74,10 +74,13 @@ public class OhajikiSpawner : MonoBehaviour
 			Vector3 localOffset = new Vector3(startX + i * spaceBetweenOhajikis, 0.15f, 0f);
 			Vector3 spawnPos = transform.position + transform.TransformDirection(localOffset);
 
+			
 			if (ohajikiQueue.Count < 1 || ohajikiQueue.Peek().layer != 6)
 			{
+				Debug.Log("Ohajiki Instantiate");
 				GameObject ohajiki = Instantiate(ohajikiPrefab, spawnPos, transform.rotation);
 				Ohajiki ohajikiComp = ohajiki.GetComponent<Ohajiki>();
+				ohajikiComp.original = false;
 				ohajikiComp.groundedBounds = groundedBounds;
 				
 				ohajikiQueue.Enqueue(ohajiki);
@@ -88,10 +91,14 @@ public class OhajikiSpawner : MonoBehaviour
 				Debug.Log("Ohajiki Teleport");
 				GameObject ohajiki = ohajikiQueue.Dequeue();
 				Ohajiki ohajikiComp = ohajikiQueueComp.Dequeue();
+				
 				ohajiki.transform.position = spawnPos;
 				ohajiki.transform.rotation = transform.rotation;
-				//ohajikiComp.groundedBounds = groundedBounds;
+				ohajikiComp.groundedBounds = groundedBounds;
 				ohajikiComp.SetGrounded();
+				
+				ohajikiQueue.Enqueue(ohajiki);
+				ohajikiQueueComp.Enqueue(ohajikiComp);
 			}
 		}
 
@@ -112,6 +119,7 @@ public class OhajikiSpawner : MonoBehaviour
 	private void OnLevelStarted()
 	{
 		gameObject.SetActive(true);
+		Debug.Log("ohajiki spawned: " + ohajikiQueue.Count);
 	}
 	
 	private void OnLevelEnded()
