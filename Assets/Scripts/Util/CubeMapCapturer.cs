@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 
+#if UNITY_EDITOR
 public class CubeMapCapturer : MonoBehaviour
 {
 	public string textureName = "cubemap";
@@ -23,3 +24,4 @@ public class CubeMapCapturer : MonoBehaviour
 		Debug.Log("Wrote: " +  path);
 	}
 }
+#endif //UNITY_EDITOR
