@@ -81,7 +81,7 @@
     "settings.editor.selected.configurable": "configurable.group.tools",
     "vue.rearranger.settings.migration": "true"
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="$PROJECT_DIR$/../../../Unity Editors/6000.0.51f1/Unity.app/Contents/MacOS/Unity" />
@@ -144,6 +144,7 @@
       <workItem from="1752720332654" duration="1214000" />
       <workItem from="1752722848955" duration="5000" />
       <workItem from="1752723039577" duration="3593000" />
+      <workItem from="1752831903997" duration="596000" />
     </task>
     <servers />
   </component>
