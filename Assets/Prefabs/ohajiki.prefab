@@ -114,9 +114,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  xBound: {x: 0, y: 0}
-  zBound: {x: 0, y: 0}
   yKillBound: -50
+  movingCollider: {fileID: 0}
+  physicsCollider: {fileID: 0}
+  original: 0
+  groundedBounds: {fileID: 0}
 --- !u!54 &4993155895319541432
 Rigidbody:
   m_ObjectHideFlags: 0
