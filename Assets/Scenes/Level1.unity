@@ -131,6 +131,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneSwitcher
       objectReference: {fileID: 0}
+    - target: {fileID: 2536847506006233830, guid: 952e22ed45398468a816581ddd0fd666, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5701594520114396486, guid: 952e22ed45398468a816581ddd0fd666, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3087,6 +3091,26 @@ PrefabInstance:
       value: PlayerInput
       objectReference: {fileID: 0}
     - target: {fileID: 6297086853063151833, guid: f9849ee995efe493fad3f5a200895d84, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297086853063151833, guid: f9849ee995efe493fad3f5a200895d84, type: 3}
+      propertyPath: m_ActionEvents.Array.data[23].m_ActionId
+      value: 2c1d2099-de24-40c0-b240-5b1925ab11af
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297086853063151833, guid: f9849ee995efe493fad3f5a200895d84, type: 3}
+      propertyPath: m_ActionEvents.Array.data[23].m_ActionName
+      value: 'Player/M_Menu[/Keyboard/m]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297086853063151833, guid: f9849ee995efe493fad3f5a200895d84, type: 3}
+      propertyPath: m_ActionEvents.Array.data[23].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297086853063151833, guid: f9849ee995efe493fad3f5a200895d84, type: 3}
+      propertyPath: m_ActionEvents.Array.data[23].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297086853063151833, guid: f9849ee995efe493fad3f5a200895d84, type: 3}
       propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1553423336}
@@ -3098,6 +3122,26 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[22].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1458094433}
+    - target: {fileID: 6297086853063151833, guid: f9849ee995efe493fad3f5a200895d84, type: 3}
+      propertyPath: m_ActionEvents.Array.data[23].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1458094433}
+    - target: {fileID: 6297086853063151833, guid: f9849ee995efe493fad3f5a200895d84, type: 3}
+      propertyPath: m_ActionEvents.Array.data[23].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297086853063151833, guid: f9849ee995efe493fad3f5a200895d84, type: 3}
+      propertyPath: m_ActionEvents.Array.data[23].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnM_Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297086853063151833, guid: f9849ee995efe493fad3f5a200895d84, type: 3}
+      propertyPath: m_ActionEvents.Array.data[23].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SceneSwitcher, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297086853063151833, guid: f9849ee995efe493fad3f5a200895d84, type: 3}
+      propertyPath: m_ActionEvents.Array.data[23].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7761122668226191496, guid: f9849ee995efe493fad3f5a200895d84, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -121,6 +121,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "M_Menu",
+                    "type": "Button",
+                    "id": "2c1d2099-de24-40c0-b240-5b1925ab11af",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -759,6 +768,17 @@
                     "processors": "Scale(factor=9)",
                     "groups": "",
                     "action": "NumKeys",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bd51fe8f-f7e1-4f48-a495-eb11e1203638",
+                    "path": "<Keyboard>/m",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "M_Menu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -17,4 +17,9 @@ public class SceneSwitcher : MonoBehaviour
         
         SceneManager.LoadScene(keyVal-1);
     }
+
+    public void OnM_Menu(InputAction.CallbackContext context)
+    {
+        SceneManager.LoadScene("Title");
+    }
 }
