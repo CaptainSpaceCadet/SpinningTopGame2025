@@ -71,11 +71,12 @@ public class SpinningTopController : MonoBehaviour
 
 	public void OnJump(InputAction.CallbackContext context)
 	{
-		if(!jumpSoundEmitter.IsPlaying()) jumpSoundEmitter.Play();
 		
 		if (context.started && isGrounded)
 		{
-			rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            if (!jumpSoundEmitter.IsPlaying()) jumpSoundEmitter.Play();
+
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 		}
 	}
 
@@ -110,13 +111,13 @@ public class SpinningTopController : MonoBehaviour
 		{
 			Vector2 desiredDir = m_moveInput.normalized;
 			Vector2 desiredVelocity = desiredDir * maxSpeed;
-			velocity = Vector2.Lerp(velocity, desiredVelocity, directionLerpSpeed * Time.deltaTime);
+			velocity = Vector2.Lerp(velocity, desiredVelocity, directionLerpSpeed * Time.fixedDeltaTime);
 			speed = velocity.magnitude;
 			m_currentDirection = speed > 0.01f ? velocity.normalized : Vector2.zero;
 		}
 		else
 		{
-			speed -= deceleration * Time.deltaTime;
+			speed -= deceleration * Time.fixedDeltaTime;
 			speed = Mathf.Max(speed, 0f);
 			velocity = m_currentDirection * speed;
 		}
@@ -127,14 +128,14 @@ public class SpinningTopController : MonoBehaviour
 		}
 		else
 		{
-			transform.rotation = Quaternion.Lerp(transform.rotation, defaultRotation, rotationReturnSpeed * Time.deltaTime);
+			transform.rotation = Quaternion.Lerp(transform.rotation, defaultRotation, rotationReturnSpeed * Time.fixedDeltaTime);
 		}
 	}
 
 	private void Move(Vector2 velocity)
 	{
 		// ���������̂ݎ蓮�ړ��i�W�����v��d�͂�Rigidbody�ɔC����j
-		Vector3 move = new Vector3(velocity.x, 0, velocity.y) * Time.deltaTime;
+		Vector3 move = new Vector3(velocity.x, 0, velocity.y) * Time.fixedDeltaTime;
 		rb.MovePosition(rb.position + move);
 
 		// Tilt in the direction of movement
