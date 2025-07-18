@@ -19,33 +19,42 @@ public class Fusha : MonoBehaviour
     private GameObject player;
     private Rigidbody playerRb;
     
+    // just for gizmo
+    //private Vector3 capsulteColliderCenterRealSpace = new Vector3(-03f, 0.7f, 0f);
+    
     private void Start()
     {
         CapsuleCollider capsuleCollider = GetComponent<CapsuleCollider>();
         capsuleCollider.height = (1f / transform.lossyScale.y) * liftHeight;
         Debug.Log("(1f / transform.lossyScale.y) * liftHeight " + (1f / transform.lossyScale.y) * liftHeight);
-        capsuleCollider.center = new Vector3(0f, capsuleCollider.height / 2f, 0f);
+        capsuleCollider.center = new Vector3(capsuleCollider.center.x, capsuleCollider.center.y, capsuleCollider.height / 2f);
         Debug.Log("capsuleCollider.center " + capsuleCollider.center);
     }
     
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = new Color(0f, 1f, 1f, 0.3f);
-        Gizmos.DrawWireCube(transform.position + Vector3.up * liftHeight / 2f, new Vector3(transform.localScale.x, liftHeight, transform.localScale.z));;
-        Gizmos.color = new Color(0f, 0.2f, 0.4f);
-        Gizmos.DrawWireCube(transform.position + Vector3.up * liftDecayHeight / 2f, new Vector3(transform.localScale.x, liftDecayHeight, transform.localScale.z));
-    }
+    // private void OnDrawGizmosSelected()
+    // {
+    //     Gizmos.color = new Color(0f, 1f, 1f, 0.3f);
+    //     Gizmos.DrawWireCube( transform.position + capsulteColliderCenterRealSpace + Vector3.up * liftHeight / 2f, new Vector3(1f, liftHeight, 1f));;
+    //     Gizmos.color = new Color(0f, 0.2f, 0.4f);
+    //     Gizmos.DrawWireCube(transform.position + capsulteColliderCenterRealSpace + Vector3.up * liftDecayHeight / 2f, new Vector3(1f, liftDecayHeight, 1f));
+    // }
     
     // Event functions
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("");
         Debug.Log("Fusha TriggerEnter");
+        Debug.Log("name " + other.gameObject.name);
+        Debug.Log("tag " + other.tag);
+        
         if (other.gameObject.CompareTag("player"))
         {
             Debug.Log("Fusha TriggerEnter Player");
             player = other.gameObject;
             playerRb = other.gameObject.GetComponent<Rigidbody>();
         }
+        
+        Debug.Log("");
     }
 
     private void OnTriggerStay(Collider other)

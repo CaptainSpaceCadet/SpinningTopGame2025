@@ -63,7 +63,7 @@ public class SpinningTopController : MonoBehaviour
 	public void OnMove(InputAction.CallbackContext context)
 	{
 		if(!moveSoundEmitter.IsPlaying()) moveSoundEmitter.Play();
-		Debug.Log("Move");
+		//Debug.Log("Move");
 		m_moveInput = context.ReadValue<Vector2>();
 		if (reverseVertical) m_moveInput.y *= -1;
 		if (reverseHorizontal) m_moveInput.x *= -1;
