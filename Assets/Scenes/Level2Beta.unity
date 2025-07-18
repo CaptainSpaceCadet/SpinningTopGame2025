@@ -24072,7 +24072,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6016257206328101163, guid: 2530acc2ff359854bb2742809277b5d4, type: 3}
       propertyPath: yKillBound
-      value: -15
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 6016257206328101163, guid: 2530acc2ff359854bb2742809277b5d4, type: 3}
       propertyPath: ohajikiPrefab

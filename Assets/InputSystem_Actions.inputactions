@@ -665,6 +665,17 @@
                 },
                 {
                     "name": "",
+                    "id": "2ab92d85-414e-44ca-bb77-4c044c3fdf1b",
+                    "path": "<Keyboard>/0",
+                    "interactions": "",
+                    "processors": "Scale(factor=0)",
+                    "groups": "",
+                    "action": "NumKeys",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "b4277474-3dcf-43d0-aea0-659fd8f93de1",
                     "path": "<Keyboard>/1",
                     "interactions": "",
