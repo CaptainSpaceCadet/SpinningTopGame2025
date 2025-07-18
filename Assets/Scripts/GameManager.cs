@@ -15,14 +15,9 @@ public class GameManager : MonoBehaviour
     
     // Fields shown in the inspector
     [Header("Gameplay Settings")]
-    [SerializeField] private int totalLives = 3;
     [SerializeField] private int totalBalloons = 3;
     
     [Header("Resource UI Elements")]
-    [SerializeField] private GameObject heartContainer;
-    [SerializeField] private Sprite heartFull;
-    [SerializeField] private Sprite heartEmpty;
-    
     [SerializeField] private GameObject balloonContainer;
     [SerializeField] private Sprite balloonFull;
     [SerializeField] private Sprite balloonEmpty;
@@ -40,10 +35,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private string nextScene;
     
     // Private members
-    private int currentLives = 3;
     private int currentBalloons = 0;
-    
-    private Image[] heartImages;
     private Image[] balloonImages;
     
     private void Awake()
@@ -59,18 +51,10 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        heartImages = heartContainer.GetComponentsInChildren<Image>();
         balloonImages = balloonContainer.GetComponentsInChildren<Image>();
     }
     
     // Resource functions
-    public void DecreaseLives()
-    {
-        currentLives--;
-        if (currentLives <= 0) GameOver();
-        RenderLives(currentLives);
-    }
-
     public void IncreaseBalloons()
     {
         currentBalloons++;
@@ -79,28 +63,14 @@ public class GameManager : MonoBehaviour
     }
     
     // UI functions
-    private void RenderLives(int lives)
-    {
-        Debug.Log(lives);
-        if (lives > totalLives) return;
-        for (int i = 0; i < lives; i++)
-        {
-            heartImages[i].sprite = heartFull;
-        }
-        for (int i = lives; i < totalLives; i++)
-        {
-            heartImages[i].sprite = heartEmpty;
-        }
-    }
-    
     private void RenderBalloons(int balloons, Image[] balloonSprites)
     {
-        if (balloons > totalLives) return;
+        if (balloons > totalBalloons) return;
         for (var i = 0; i < balloons; i++)
         {
             balloonSprites[i].sprite = balloonFull;
         }
-        for (var i = balloons; i < totalLives; i++)
+        for (var i = balloons; i < totalBalloons; i++)
         {
             balloonSprites[i].sprite = balloonEmpty;
         }
@@ -112,19 +82,15 @@ public class GameManager : MonoBehaviour
         lossScreen.SetActive(false);
         winScreen.SetActive(false);
         
-        heartContainer.SetActive(true);
         balloonContainer.SetActive(true);
         
         // resources
-        currentLives = totalLives;
-        RenderLives(currentLives);
         currentBalloons = 0;
         RenderBalloons(currentBalloons, balloonImages);
     } 
 
     private void GameEnded()
     {
-        heartContainer.SetActive(false);
         balloonContainer.SetActive(false);
     }
 

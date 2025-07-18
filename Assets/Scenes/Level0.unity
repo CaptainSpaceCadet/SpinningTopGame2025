@@ -360,11 +360,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2616207399825537806, guid: 8e7c1b0c060c446a28b16a0e7c74bf8b, type: 3}
   m_PrefabInstance: {fileID: 110946751}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &110946758 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7962863713781452904, guid: 8e7c1b0c060c446a28b16a0e7c74bf8b, type: 3}
-  m_PrefabInstance: {fileID: 110946751}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &167537496
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1295,6 +1290,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1164573936432936239, guid: 9e7dfe487b00d450f867b59aff68c9a4, type: 3}
+      propertyPath: nextScene
+      value: Level1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1164573936432936239, guid: 9e7dfe487b00d450f867b59aff68c9a4, type: 3}
       propertyPath: winScreen
       value: 
       objectReference: {fileID: 110946756}
@@ -1305,7 +1304,7 @@ PrefabInstance:
     - target: {fileID: 1164573936432936239, guid: 9e7dfe487b00d450f867b59aff68c9a4, type: 3}
       propertyPath: heartContainer
       value: 
-      objectReference: {fileID: 110946758}
+      objectReference: {fileID: 0}
     - target: {fileID: 1164573936432936239, guid: 9e7dfe487b00d450f867b59aff68c9a4, type: 3}
       propertyPath: balloonContainer
       value: 
