@@ -228,7 +228,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 659.3, y: 305.4}
+  m_AnchoredPosition: {x: 659.3, y: 426.12}
   m_SizeDelta: {x: 414.9, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &769479928
@@ -252,7 +252,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "\u30C7\u30A3\u30EC\u30AF\u30BF\u30FC\uFF1A\n\u67F3\u7530\u3000\u30B5\u30EA\u30E0\n\n\u30D7\u30ED\u30B0\u30E9\u30DF\u30F3\u30B0\uFF1A\n\u30AF\u30A4\u30F3\u3000\u30B8\u30E7\u30A2\u30F3\n\u67F3\u7530\u3000\u30B5\u30EA\u30E0\n\n\u30E2\u30C7\u30EA\u30F3\u30B0\uFF1A\n\u7247\u5C71
-    \u7425\u73C0 \n\u4F50\u85E4\u5BFF\u78E8\n\u68EE\u5D8B\u3000\u677E\u6C70\n\u884C\u6B66\u7FFC\u6597\n\n\u30B3\u30F3\u30C8\u30ED\u30FC\u30E9\u30FC\uFF1A\n\u5C71\u5185\u4F73\u4E43\n\n\u30B5\u30A6\u30F3\u30C9\uFF1A\n\u5F8C\u85E4\u5065\u592A\nAudio
+    \u7425\u73C0 \n\u4F50\u85E4\u5BFF\u78E8\n\u68EE\u5D8B\u3000\u677E\u6C70\n\u884C\u6B66\u7FFC\u6597\n\n\u30A4\u30E9\u30B9\u30C8\uFF1A\n\u7247\u5C71
+    \u7425\u73C0 \n\n\u30B3\u30F3\u30C8\u30ED\u30FC\u30E9\u30FC\uFF1A\n\u5C71\u5185\u4F73\u4E43\n\n\u30B5\u30A6\u30F3\u30C9\uFF1A\n\u5F8C\u85E4\u5065\u592A\nAudio
     Engine: FMOD Studio by Firelight Technologies Pty Ltd.\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9fd689c1248fd0b45a45338cf6eca642, type: 2}
@@ -466,6 +467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9c40efc2764d584188ea49bbf5bbbec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadSceneName: Level1
 --- !u!4 &1238860120
 Transform:
   m_ObjectHideFlags: 0
